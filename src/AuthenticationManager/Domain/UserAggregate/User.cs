@@ -1,5 +1,6 @@
 using Domain.UserAggregate.Entities;
 using Domain.UserAggregate.Events;
+using Domain.UserAggregate.Snapshots;
 using Domain.UserAggregate.ValueObjects;
 
 using Shared.Domain;
@@ -8,12 +9,14 @@ namespace Domain.UserAggregate;
 
 public sealed class User : Aggregate<UserId>
 {
-    public Role Role { get; private set; }
-    public Status Status { get; private set; }
+    public Role Role { get; private set; } = null!;
+    public Status Status { get; private set; } = null!;
+    public Data Data { get; private set; } = null!;
+    public Profile Profile { get; private set; } = null!;
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
-    public Data Data { get; private set; }
-    public Profile Profile { get; private set; }
+
+    private User() { } //ef
     private User(UserId userId, Data data, Profile profile)
     {
         Id = userId;
@@ -31,11 +34,20 @@ public sealed class User : Aggregate<UserId>
         var data = Data.Create(userId, username, email, password, salt);
         var profile = Profile.Create(userId);
         var user = new User(userId, data, profile);
-
         user.AddDomainEvent(new UserCreatedDomainEvent(user));
-
         return user;
     }
+
+    public UserSnapshot ToSnapshot => new()
+    {
+        UserId = Id.Value,
+        Role = Role.Value,
+        Status = Status.Value,
+        Data = Data.ToSnapshot(),
+        Profile = Profile.ToSnapshot(),
+        CreatedAt = CreatedAt,
+        UpdatedAt = UpdatedAt
+    };
 
     public void Verify()
     {
@@ -71,7 +83,7 @@ public sealed class User : Aggregate<UserId>
         AddDomainEvent(new UserEmailUpdatedDomainEvent(this));
         UpdatedAt = DateTime.UtcNow;
     }
-    
+
     public void UpdateUsername(Username username)
     {
         Data.UpdateUsername(username);
