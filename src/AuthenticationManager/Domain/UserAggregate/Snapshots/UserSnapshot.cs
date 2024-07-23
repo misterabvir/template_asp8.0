@@ -1,3 +1,6 @@
+using System.Text.Json;
+using Shared.Results;
+
 namespace Domain.UserAggregate.Snapshots;
 
 public class UserSnapshot
@@ -9,4 +12,11 @@ public class UserSnapshot
     public ProfileSnapshot Profile { get; init; } = null!;
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
+
+    public string ToJson() => JsonSerializer.Serialize(this);
+    public static Result<UserSnapshot> FromJson(string json)
+    {
+        var snapshot = JsonSerializer.Deserialize<UserSnapshot>(json);
+        return snapshot is null ? Errors.Users.FailDeserializeSnapshot : snapshot;
+    }
 }

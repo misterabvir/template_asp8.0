@@ -3,8 +3,22 @@ version: '3.4'
 name: template
 
 services:
+  mssql:
+    container_name: authentication_container
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Strong_$_Password"
+    volumes:
+      - ./containers/authentication_manager/database:/var/opt/mssql/data
+    ports:
+      - 1433:1433
+    networks:
+      - template_net
+
 
 
 networks:
-
+  template_net:
 
