@@ -22,7 +22,7 @@ public static class ChangeRole
         {
             RuleFor(c => c.InitiatorUserId).NotEmpty().NotEqual(x => x.TargetUserId);
             RuleFor(c => c.TargetUserId).NotEmpty();
-            RuleFor(c => c.RoleName).NotEmpty().Must(UserRoles.AppRoles.Contains);
+            RuleFor(c => c.RoleName).NotEmpty().Must(AppPermissions.Roles.Contains);
         }
     }
 

@@ -1,3 +1,5 @@
+using Shared.Domain;
+
 namespace Presentation.Endpoints;
 
 
@@ -11,6 +13,13 @@ public static partial class Users
         app.MapPost(ResetPassword.Endpoint, ResetPassword.Handler).WithOpenApi();
         app.MapPost(SendVerificationCode.Endpoint, SendVerificationCode.Handler).WithOpenApi();
         app.MapPost(VerifyCode.Endpoint, VerifyCode.Handler).WithOpenApi();
+        
+        app.MapPut(UpdateData.Endpoint, UpdateData.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
+        app.MapPut(UpdatePassword.Endpoint, UpdatePassword.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
+        app.MapPut(UpdateProfile.Endpoint, UpdateProfile.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
+        app.MapPut(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AppPermissions.AdministratorPolicy).WithOpenApi();
+        
+        app.MapDelete(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
         return app;
     }
 }

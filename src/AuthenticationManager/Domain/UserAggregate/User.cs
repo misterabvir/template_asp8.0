@@ -19,7 +19,7 @@ public sealed class User : Aggregate<UserId>
     private User(UserId userId, Data data, Profile profile)
     {
         Id = userId;
-        Role = Role.Create(UserRoles.UserRole);
+        Role = Role.Create(AppPermissions.UserRole);
         Status = Status.NotVerified;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;

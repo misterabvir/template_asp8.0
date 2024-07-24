@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
+using Shared.Domain;
+
 namespace Infrastructure;
 
 public static class Tokens
@@ -25,7 +27,9 @@ public static class Tokens
         services.AddScoped<ITokenService, Service>();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = settings.TokenValidationParameters);
-        services.AddAuthorization();    
+        services.AddAuthorizationBuilder()
+            .AddPolicy(AppPermissions.AdministratorPolicy, policy => policy.RequireRole(AppPermissions.AdministratorRole))
+            .AddPolicy(AppPermissions.UserPolicy, policy => policy.RequireRole(AppPermissions.Roles));    
         return services;
     }
 
