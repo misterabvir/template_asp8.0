@@ -1,9 +1,4 @@
-
-
-
-using Domain.UserAggregate.Snapshots;
 using Domain.UserAggregate.ValueObjects;
-
 using Shared.Domain;
 
 namespace Domain.UserAggregate.Entities;
@@ -30,12 +25,6 @@ public sealed class Data : Entity<UserId>
     {
         return new Data(userId, username, email, password, salt);
     }
-
-    internal DataSnapshot ToSnapshot() => new ()
-    {
-        Username = Username.Value,
-        Email = Email.Value
-    };
 
     internal void UpdatePassword(Password password, Salt salt)
     {

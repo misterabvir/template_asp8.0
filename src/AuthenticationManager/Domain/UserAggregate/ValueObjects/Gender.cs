@@ -11,4 +11,5 @@ public sealed  record Gender : ValueObject
     public static Gender Female => new ("Female");
     public static Gender Other => new ("Other");
     public static Gender Empty => new (string.Empty);
+    public const string None = "None";
 }

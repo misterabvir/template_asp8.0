@@ -7,5 +7,7 @@ public sealed  record Password : ValueObject
     public byte[] Value { get; init; }
     private Password(byte[] value) => Value = value;
     public static Password Create(byte[] value) => new (value);
-    public bool IsSameAs(Password password) => Value.SequenceEqual(password.Value);
+    public bool IsSameAs(byte[] password) => Value.SequenceEqual(password);
+
+    public const string Regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-]).{8,}$";
 }

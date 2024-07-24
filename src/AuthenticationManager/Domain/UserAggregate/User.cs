@@ -1,6 +1,5 @@
 using Domain.UserAggregate.Entities;
 using Domain.UserAggregate.Events;
-using Domain.UserAggregate.Snapshots;
 using Domain.UserAggregate.ValueObjects;
 
 using Shared.Domain;
@@ -20,7 +19,7 @@ public sealed class User : Aggregate<UserId>
     private User(UserId userId, Data data, Profile profile)
     {
         Id = userId;
-        Role = Role.User;
+        Role = Role.Create(UserRoles.UserRole);
         Status = Status.NotVerified;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
@@ -38,17 +37,6 @@ public sealed class User : Aggregate<UserId>
         return user;
     }
 
-    public UserSnapshot ToSnapshot => new()
-    {
-        UserId = Id.Value,
-        Role = Role.Value,
-        Status = Status.Value,
-        Data = Data.ToSnapshot(),
-        Profile = Profile.ToSnapshot(),
-        CreatedAt = CreatedAt,
-        UpdatedAt = UpdatedAt
-    };
-
     public void Verify()
     {
         Status = Status.Active;
@@ -63,10 +51,10 @@ public sealed class User : Aggregate<UserId>
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void AddRole(Role role)
+    public void ChangeRole(Role role)
     {
         Role = role;
-        AddDomainEvent(new UserRoleAddedDomainEvent(this));
+        AddDomainEvent(new UserRoleChangedDomainEvent(this));
         UpdatedAt = DateTime.UtcNow;
     }
 
@@ -77,17 +65,11 @@ public sealed class User : Aggregate<UserId>
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void UpdateEmail(Email email)
+    public void UpdateData(Email email, Username username)
     {
         Data.UpdateEmail(email);
-        AddDomainEvent(new UserEmailUpdatedDomainEvent(this));
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void UpdateUsername(Username username)
-    {
         Data.UpdateUsername(username);
-        AddDomainEvent(new UsernameUpdatedDomainEvent(this));
+        AddDomainEvent(new UserDataUpdatedDomainEvent(this));
         UpdatedAt = DateTime.UtcNow;
     }
 

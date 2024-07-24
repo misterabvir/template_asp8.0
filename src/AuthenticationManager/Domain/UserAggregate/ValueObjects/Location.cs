@@ -8,4 +8,5 @@ public sealed  record Location : ValueObject
     private Location(string value) => Value = value;
     public static Location Create(string value) => new (value);
     public static Location Empty => new (string.Empty);
+    public const string None = "None";
 }

@@ -3,21 +3,48 @@ version: '3.4'
 name: template
 
 services:
-  mssql:
-    container_name: authentication_container
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  db:
+    image: postgres:latest
+    container_name: authentication_db
+    hostname: authentication_db
     restart: always
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Strong_$_Password"
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - ./containers/authentication_manager/database:/var/opt/mssql/data
+      - ./containers/postgres:/var/lib/postgresql/data
     ports:
-      - 1433:1433
+      - 5432:5432
     networks:
       - template_net
 
-
+  cache:
+    image: redis
+    container_name: authentication_cache
+    hostname: authentication_cache
+    ports:
+      - 6379:6379
+    volumes:
+      - ./containers/redis/:/usr/local/etc/redis
+    networks:
+      - template_net
+      
+  queue:
+    image: rabbitmq:management
+    container_name: authentication_queue
+    hostname: authentication_queue
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=username
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./containers/rabbitmq/:/var/lib/rabbitmq
+    networks: 
+      - template_net
 
 networks:
   template_net:

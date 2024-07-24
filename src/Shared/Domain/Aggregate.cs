@@ -1,6 +1,6 @@
 namespace Shared.Domain;
 
-public abstract class Aggregate<TId> : Entity<TId> where TId : ValueObject
+public abstract class Aggregate<TId> : Entity<TId>, IContainDomainEvents where TId : ValueObject
 { 
     private readonly List<IDomainEvent> _domainEvents = [];
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();

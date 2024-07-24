@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Authenticatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\AuthenticationManager\Infrastructure\Infrastructure.csproj", "{230D88C0-5EE9-405A-BEF3-EF7E964FB071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "src\AuthenticationManager\Persistence\Persistence.csproj", "{60865ADA-1CF3-4E29-B455-854F8A3AA80D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "src\AuthenticationManager\Presentation\Presentation.csproj", "{856A8BD7-571B-45F2-9ADC-7494D1CC3266}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{595A8371-D44F-48D1-9EC1-642060634A7F}"
@@ -23,9 +21,6 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{04A43160-5F02-42AA-A227-3A10E2C914BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,10 +35,6 @@ Global
 		{230D88C0-5EE9-405A-BEF3-EF7E964FB071}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{230D88C0-5EE9-405A-BEF3-EF7E964FB071}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{230D88C0-5EE9-405A-BEF3-EF7E964FB071}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60865ADA-1CF3-4E29-B455-854F8A3AA80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60865ADA-1CF3-4E29-B455-854F8A3AA80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60865ADA-1CF3-4E29-B455-854F8A3AA80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60865ADA-1CF3-4E29-B455-854F8A3AA80D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{856A8BD7-571B-45F2-9ADC-7494D1CC3266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{856A8BD7-571B-45F2-9ADC-7494D1CC3266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856A8BD7-571B-45F2-9ADC-7494D1CC3266}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,12 +44,14 @@ Global
 		{595A8371-D44F-48D1-9EC1-642060634A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595A8371-D44F-48D1-9EC1-642060634A7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{50981F55-FD4C-4A1A-A489-5039F13EE55C} = {A624A55B-40AF-4301-AD4E-58E9CE3E60FA}
 		{04A43160-5F02-42AA-A227-3A10E2C914BB} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{083ADAE3-C3B2-4250-9FD2-F445D129D814} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{230D88C0-5EE9-405A-BEF3-EF7E964FB071} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
-		{60865ADA-1CF3-4E29-B455-854F8A3AA80D} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{856A8BD7-571B-45F2-9ADC-7494D1CC3266} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{595A8371-D44F-48D1-9EC1-642060634A7F} = {A624A55B-40AF-4301-AD4E-58E9CE3E60FA}
 	EndGlobalSection

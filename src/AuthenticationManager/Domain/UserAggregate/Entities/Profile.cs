@@ -1,4 +1,3 @@
-using Domain.UserAggregate.Snapshots;
 using Domain.UserAggregate.ValueObjects;
 
 using Shared.Domain;
@@ -33,20 +32,6 @@ public sealed class Profile : Entity<UserId>
     }
 
     internal static Profile Create(UserId userId) => new(userId);
-
-    internal ProfileSnapshot ToSnapshot() =>
-        new()
-        {
-            FirstName = FirstName.Value,
-            LastName = LastName.Value,
-            ProfilePicture = LastName.Value,
-            CoverPicture = LastName.Value,
-            Bio = Bio.Value,
-            Gender = Gender.Value,
-            Birthday = Birthday.Value,
-            Website = Website.Value,
-            Location = Location.Value
-        };
 
     internal void Update(FirstName firstName, LastName lastName, ProfilePicture profilePicture, CoverPicture coverPicture, Bio bio, Gender gender, Birthday birthday, Website website, Location location)
     {
