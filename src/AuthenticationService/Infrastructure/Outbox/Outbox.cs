@@ -11,31 +11,38 @@ namespace Infrastructure;
 
 public static class Outbox
 {
-    const string JobKey = "OutboxMessagesJob";
-    const int IntervalInSeconds = 20;
-    const int MessagePerOneTime = 20;
-    
-    public static IServiceCollection AddOutboxMessages(this IServiceCollection services, IConfiguration configuration)
+
+    public static Settings AddOutboxMessages(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddQuartz(options =>
-        {      
-            var jobKey = new JobKey(JobKey);
-            options.AddJob<PublishJob>(jobKey)
-                .AddTrigger(trigger => trigger.ForJob(jobKey)
-                    .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(IntervalInSeconds).RepeatForever()));
-        });
-        services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-        return services;
+        var settings = configuration.GetSection(Settings.SectionName).Get<Settings>() ?? 
+            throw new Exception("Outbox settings not configured");
+        services.AddSingleton(settings);
+        return settings;
     }
 
+    public static void AddOutboxMessagesJob(this IServiceCollectionQuartzConfigurator configurator, Settings settings )
+    {
+        var jobKey = new JobKey(settings.JobKey);
+            configurator.AddJob<PublishJob>(jobKey)
+                .AddTrigger(trigger => trigger.ForJob(jobKey)
+                    .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(settings.IntervalInSeconds).RepeatForever()));
+    }
+    public class Settings{
+        public const string SectionName = "Settings:Outbox";
+        public required string JobKey { get; set; } 
+        public required int IntervalInSeconds { get; set; }
+        public required int MessagePerOneTime { get; set; }
+    }
+
+
     [DisallowConcurrentExecution]
-    public class PublishJob(AuthenticationDbContext dbContext, IPublisher publisher, ILogger<PublishJob> logger) : IJob
+    public class PublishJob(AuthenticationDbContext dbContext, IPublisher publisher, ILogger<PublishJob> logger, Settings settings) : IJob
     {
         public async Task Execute(IJobExecutionContext context)
         {
             var messages = await dbContext.OutboxMessages
             .Where(x => x.ProcessedAt == null)
-            .Take(MessagePerOneTime)
+            .Take(settings.MessagePerOneTime)
             .ToListAsync(context.CancellationToken);
             foreach (var message in messages)
             {               
