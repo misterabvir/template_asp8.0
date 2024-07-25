@@ -46,6 +46,16 @@ services:
     networks: 
       - template_net
 
+  mail:
+    container_name: fake_mail
+    image: haravich/fake-smtp-server
+    restart: always
+    ports:
+      - "12025:1025"
+      - "12080:1080"
+    networks: 
+      - template_net
+
 networks:
   template_net:
 

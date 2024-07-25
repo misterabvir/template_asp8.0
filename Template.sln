@@ -5,17 +5,23 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A624A55B-40AF-4301-AD4E-58E9CE3E60FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationManager", "AuthenticationManager", "{50981F55-FD4C-4A1A-A489-5039F13EE55C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationService", "AuthenticationService", "{50981F55-FD4C-4A1A-A489-5039F13EE55C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\AuthenticationManager\Application\Application.csproj", "{04A43160-5F02-42AA-A227-3A10E2C914BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\AuthenticationService\Application\Application.csproj", "{04A43160-5F02-42AA-A227-3A10E2C914BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\AuthenticationManager\Domain\Domain.csproj", "{083ADAE3-C3B2-4250-9FD2-F445D129D814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\AuthenticationService\Domain\Domain.csproj", "{083ADAE3-C3B2-4250-9FD2-F445D129D814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\AuthenticationManager\Infrastructure\Infrastructure.csproj", "{230D88C0-5EE9-405A-BEF3-EF7E964FB071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\AuthenticationService\Infrastructure\Infrastructure.csproj", "{230D88C0-5EE9-405A-BEF3-EF7E964FB071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "src\AuthenticationManager\Presentation\Presentation.csproj", "{856A8BD7-571B-45F2-9ADC-7494D1CC3266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "src\AuthenticationService\Presentation\Presentation.csproj", "{856A8BD7-571B-45F2-9ADC-7494D1CC3266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{595A8371-D44F-48D1-9EC1-642060634A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{595A8371-D44F-48D1-9EC1-642060634A7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "src\MailService\Presentation\Presentation.csproj", "{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6E274172-8556-47A5-8A5A-24B4BE6271F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MailService", "MailService", "{49521F8F-3EAB-42DF-ACCF-232343EEBC9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,10 @@ Global
 		{595A8371-D44F-48D1-9EC1-642060634A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{595A8371-D44F-48D1-9EC1-642060634A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595A8371-D44F-48D1-9EC1-642060634A7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +64,7 @@ Global
 		{230D88C0-5EE9-405A-BEF3-EF7E964FB071} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{856A8BD7-571B-45F2-9ADC-7494D1CC3266} = {50981F55-FD4C-4A1A-A489-5039F13EE55C}
 		{595A8371-D44F-48D1-9EC1-642060634A7F} = {A624A55B-40AF-4301-AD4E-58E9CE3E60FA}
+		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362} = {49521F8F-3EAB-42DF-ACCF-232343EEBC9C}
+		{49521F8F-3EAB-42DF-ACCF-232343EEBC9C} = {A624A55B-40AF-4301-AD4E-58E9CE3E60FA}
 	EndGlobalSection
 EndGlobal
