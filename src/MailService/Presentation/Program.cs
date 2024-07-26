@@ -16,6 +16,7 @@ builder.Services.AddMassTransit(options =>
                 cfg.ConfigureEndpoints(context);
             });
                 options.AddConsumer<UserVerificationCodeSentConsumer>();
+                options.AddConsumer<UserWelcomeEmailSentConsumer>();
         });
 
 builder.Build().Run();  

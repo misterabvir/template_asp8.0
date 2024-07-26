@@ -17,7 +17,7 @@ public record UserCreatedDomainEvent(Guid UserId, string Username, string Email)
 /// This event is triggered when a new user is verify email after register
 /// </summary>
 /// <param name="UserId"></param>
-public record UserVerifiedDomainEvent(Guid UserId) : IDomainEvent;
+public record UserVerifiedDomainEvent(Guid UserId, string Username, string Email) : IDomainEvent;
 
 /// <summary>
 /// User Suspended Domain Event

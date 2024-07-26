@@ -7,3 +7,5 @@ namespace Shared.Events;
 /// <param name="Email"></param>
 /// <param name="VerificationCode"></param>
 public record UserVerificationCodeSentEvent(string Username, string Email, string VerificationCode);
+
+public record UserWelcomeEmailSentEvent(string Username, string Email);

@@ -66,7 +66,7 @@ public sealed class User : Aggregate<UserId>
     public void Verify()
     {
         Status = Status.Active;
-        AddDomainEvent(new UserVerifiedDomainEvent(Id.Value));
+        AddDomainEvent(new UserVerifiedDomainEvent(Id.Value, Data.Username, Data.Email));
         UpdatedAt = DateTime.UtcNow;
     }
 
