@@ -8,6 +8,15 @@ using Shared.Results;
 
 namespace Infrastructure;
 
+/// <summary>
+/// Verification email class
+/// Contains:
+/// </summary>
+/// <remarks>
+/// Settings for generate verification code and cached, and compare him, must configured on appsettings  <br/>
+/// Extension methods for register settings and service<br/>
+/// Implementation of the <see cref="IVerificationService"/> interface<br/>
+/// </remarks>
 public static class Verifications
 {
    
@@ -47,7 +56,7 @@ public static class Verifications
     {
         public int VerificationCodeLength => settings.VerificationCodeLength;
 
-        public async Task<Result> SendVerificationCodeAsync(Guid userId, string email, CancellationToken cancellationToken)
+        public async Task<Result> SendVerificationCodeAsync(Guid userId, string username, string email, CancellationToken cancellationToken)
         {
             var cachedTimeOut = await cache.GetStringAsync(Settings.GetTimeOutKey(userId), token: cancellationToken);
             if (cachedTimeOut is not null){
@@ -58,7 +67,7 @@ public static class Verifications
             await cache.SetStringAsync(Settings.GetVerificationCodeKey(userId), code, settings.CodeExpirationOptions, cancellationToken);
             await cache.SetStringAsync(Settings.GetTimeOutKey(userId), "true", settings.TimeOutOptions, cancellationToken);
             
-            await publisher.Publish(new Application.Users.Events.VerificationCodeSent.Notification(email, code), cancellationToken);
+            await publisher.Publish(new Application.Users.Events.VerificationCodeSent.Notification(username, email, code), cancellationToken);
 
             return Result.Success();
         }

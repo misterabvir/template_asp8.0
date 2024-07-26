@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Represents status user in system 
+/// </summary>
 public sealed record Status : ValueObject
 {
     public string Value { get; init; }

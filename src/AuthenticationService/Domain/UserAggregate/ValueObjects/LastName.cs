@@ -2,6 +2,10 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Last name of a user
+/// </summary>
+/// <param name="Value"></param>
 public record LastName : ValueObject
 {
     public string Value { get; init; }

@@ -2,6 +2,15 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Represents the website value object.
+/// </summary>
+/// <param name="Value">The website value.</param>
+/// <param name="Empty">The empty website value.</param>
+/// <remarks>
+/// This value object is used to represent the website of a user.
+/// </remarks>
+
 public sealed  record Website : ValueObject
 {
     public string Value { get; init; }

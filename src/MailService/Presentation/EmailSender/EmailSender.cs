@@ -3,11 +3,11 @@ using MailKit.Net.Smtp;
 using MimeKit;
 
 
-namespace EmailManager;
+namespace Presentation;
 
 public interface IEmailSender
 {
-    Task SendEmailAsync(string to, string content, EmailSender.EmailTarget emailTarget);
+    Task SendVerificationEmailAsync(string email, string username, string code);
 }
 
 public static class EmailSender
@@ -21,8 +21,6 @@ public static class EmailSender
         return services;
     }
 
-
-
     public class Settings
     {
         public required string Host { get; set; }
@@ -34,39 +32,21 @@ public static class EmailSender
 
     public class Service(Settings settings) : IEmailSender
     {
-        public async Task SendEmailAsync(string to, string content, EmailTarget emailTarget)
+        public async Task SendVerificationEmailAsync(string email, string username, string code)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(settings.Username, settings.Address));
-            message.To.Add(new MailboxAddress("", to));
-            message.Subject = emailTarget switch
-            {
-                EmailTarget.Verification => "Verification Code",
-                EmailTarget.Welcome => "Welcome",
-                _ => "Notification"
-            };
+            message.To.Add(new MailboxAddress("", email));
+            message.Subject =  "Verification Code";
 
-            message.Body = emailTarget switch
-            {
-                EmailTarget.Verification => new TextPart("html") { Text = Templates.GetVerificationBodyEmail(to, content) },
-                EmailTarget.Welcome => new TextPart("html") { Text = Templates.GetWelcomeBodyEmail(to) },
-                _ => new TextPart("html") { Text = "Notification" }
-            };
+            message.Body =  new TextPart("html") { Text = Templates.GetWelcomeBodyEmail(username)};
 
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync(settings.Host, settings.Port, false);
-                // await client.AuthenticateAsync(settings.Username, settings.Password);
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
-            }
+            using var client = new SmtpClient();
+            await client.ConnectAsync(settings.Host, settings.Port, false);
+            // await client.AuthenticateAsync(settings.Username, settings.Password);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
         }
-    }
-
-    public enum EmailTarget
-    {
-        Verification,
-        Welcome
     }
 
 

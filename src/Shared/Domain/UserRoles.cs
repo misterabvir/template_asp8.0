@@ -1,12 +1,35 @@
 namespace Shared.Domain;
 
-public static class AppPermissions
+/// <summary>
+/// Authorization constants
+/// </summary>
+public static class AuthorizationConstants
 {
-        public const string AdministratorRole = "Administrator";
-        public const string UserRole = "User";
+	/// <summary>
+	/// Roles
+	/// </summary>
+	public static class Roles
+	{
+		public const string Administrator = "Administrator";
+		public const string User = "User";
+	}
 
-        public static IEnumerable<string> Roles => [AdministratorRole, UserRole];
+	/// <summary>
+	/// Policies
+	/// </summary>
+	public static class Policies
+	{
+		public const string Administrator = "AdministratorPolicy";
+		public const string User = "User";
+	}
 
-        public const string AdministratorPolicy = "AdministratorPolicy";
-        public const string UserPolicy = "UserPolicy";
+	/// <summary>
+	/// All roles
+	/// </summary>
+	public static IEnumerable<string> AllRoles => [Roles.Administrator, Roles.User];
+
+	/// <summary>
+	/// All policies
+	/// </summary>
+	public static IEnumerable<string> AllPolicies => [Policies.Administrator, Policies.User];
 }

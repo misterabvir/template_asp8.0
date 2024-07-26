@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Domain.UserAggregate.Configurations;
 
+/// <summary>
+/// Configuration aggregate User and entities of user owners
+/// Used for configure database table with Entity Framework Core
+/// </summary>
 public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
     private const string UserTableName = "users";

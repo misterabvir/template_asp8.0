@@ -2,6 +2,17 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Represents the username value object.
+/// </summary>
+/// <param name="Value">The username value.</param>
+/// <remarks>
+/// The username value object is a value object that represents the username of a user.
+/// It is used to ensure that the username is valid and follows the required format.
+/// The username value object is immutable and can only be created using the <see cref="Create"/> method.
+/// The username value object is also used as the username of a user in the domain model.
+/// </remarks>
+
 public sealed record Username : ValueObject
 {
     public string Value { get; init; }

@@ -1,7 +1,8 @@
-﻿using EmailManager;
-using EmailManager.Consumers;
+﻿using Presentation;
 
 using MassTransit;
+
+using Presentation.Consumers;
 
 var builder = Host.CreateApplicationBuilder();
 builder.Services.AddEmailSender(builder.Configuration);

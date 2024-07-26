@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Gender
+/// </summary>
 public sealed  record Gender : ValueObject
 {
     public string Value { get; init; }

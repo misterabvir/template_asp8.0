@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Persistence;
 
+/// <summary>
+/// Outbox pattern message
+/// </summary>
 public static partial class Outbox
 {
     public class Message

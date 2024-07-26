@@ -13,7 +13,7 @@ public class UserCreatedNotificationHandler(IVerificationService verificationSer
 {
     public async Task Handle(UserCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
-        await verificationService.SendVerificationCodeAsync(notification.UserId, notification.Email, cancellationToken);
+        await verificationService.SendVerificationCodeAsync(notification.UserId, notification.Username, notification.Email, cancellationToken);
         logger.LogInformation("User {UserId} has been created", notification.UserId);
     }
 }

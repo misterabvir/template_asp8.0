@@ -2,6 +2,10 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Url to user's cover picture
+/// </summary>
+/// </summary>
 public record CoverPicture : ValueObject
 {
     public string Value { get; init; }

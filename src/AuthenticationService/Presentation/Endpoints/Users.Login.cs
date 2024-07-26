@@ -16,7 +16,7 @@ public static partial class Users
         {
             var query = new Application.Users.Queries.Login.Query(request.Email, request.Password);
             var result = await sender.Send(query);
-            return result.IsSuccess ? Results.Ok(Responses.AuthenticationResult.FromResult(result.Value)) : Responses.Problem(result.Error);
+            return result.IsSuccess ? Results.Ok(Responses.AuthenticationResult.FromResult(result.Value)) : result.Error.Problem();
         }
     }
 }

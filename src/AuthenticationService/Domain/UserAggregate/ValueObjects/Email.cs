@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Email contact
+/// </summary>
 public sealed record Email : ValueObject
 {
     public string Value { get; init; }

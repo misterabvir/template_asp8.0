@@ -4,9 +4,19 @@ namespace Presentation.Endpoints;
 
 public static partial class Users
 {
+    internal static IResult Problem(this Error error)
+    {
+        return Results.Problem(
+            title: error.Code.ToString(),
+            statusCode: (int)error.Code,
+            detail: error.Description
+        );
+    }
 
     public static class Responses
     {
+
+
         public record AuthenticationResult
         {
             public required User User { get; set; }
@@ -79,14 +89,7 @@ public static partial class Users
             public required string Location { get; init; }
         }
 
-        internal static IResult Problem(Error error)
-        {
-            return Results.Problem(
-                title: error.Code.ToString(),
-                statusCode: (int)error.Code,
-                detail: error.Description
-            );
-        }
+
     }
 }
 

@@ -10,12 +10,24 @@ using Quartz;
 
 namespace Infrastructure.DataBaseCleaner;
 
+/// <summary>
+/// Cleaner database
+/// Contains:
+/// </summary>
+/// <remarks>
+/// Settings for background clean job, must configured on appsettings  <br/>
+/// Extension methods for register settings<br/>
+/// Extension methods for register background job<br/>
+/// Implementation of the background job for clean db from old messages and not verified users
+/// </remarks>
+
+
 public static class DataBaseCleaner
 {
     public static Settings AddDataBaseCleaner(this IServiceCollection services, IConfiguration configuration)
     {
         var settings = configuration.GetSection(Settings.SectionName).Get<Settings>()
-        ?? throw new Exception("DataBaseCleaner settings not configured");
+        ?? throw new DatabaseCleanerSettingsNotConfiguredException();
         services.AddSingleton(settings);
         return settings;
     }
@@ -27,7 +39,14 @@ public static class DataBaseCleaner
                     .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(settings.IntervalInSeconds).RepeatForever()));
     }
     
-    
+    public class DatabaseCleanerSettingsNotConfiguredException : Exception
+    {
+        public DatabaseCleanerSettingsNotConfiguredException() : base("DataBaseCleaner settings not configured")
+        {
+        }
+    }
+
+
     public class Settings
     {
         public const string SectionName = "Settings:DataBaseCleaner";

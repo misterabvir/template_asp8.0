@@ -15,6 +15,14 @@ using Shared.Domain;
 
 namespace Infrastructure;
 
+/// <summary>
+/// Contains:
+/// </summary>
+/// <remarks>
+/// Settings for create jwt token, must configured on appsettings and secrets <br/>
+/// Extension methods for adding token services.<br/>
+/// Implementation of the <see cref="ITokenService"/> for generate jwt tokens 
+/// </remarks>
 public static class Tokens
 {
     public static IServiceCollection AddTokens(
@@ -22,15 +30,20 @@ public static class Tokens
         IConfiguration configuration)
     {
         var settings = configuration.GetSection(Settings.SectionName).Get<Settings>() ??
-            throw new Exception("Token settings not configured.");
+            throw new TokenSettingsNotConfiguredException();
         services.AddSingleton(settings);
         services.AddScoped<ITokenService, Service>();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = settings.TokenValidationParameters);
         services.AddAuthorizationBuilder()
-            .AddPolicy(AppPermissions.AdministratorPolicy, policy => policy.RequireRole(AppPermissions.AdministratorRole))
-            .AddPolicy(AppPermissions.UserPolicy, policy => policy.RequireRole(AppPermissions.Roles));    
+            .AddPolicy(AuthorizationConstants.Policies.Administrator, policy => policy.RequireRole(AuthorizationConstants.Roles.Administrator))
+            .AddPolicy(AuthorizationConstants.Policies.User, policy => policy.RequireRole(AuthorizationConstants.AllRoles));    
         return services;
+    }
+
+    public class TokenSettingsNotConfiguredException : Exception
+    {
+        public TokenSettingsNotConfiguredException() : base("Token settings not configured.") { }
     }
 
     public sealed class Settings

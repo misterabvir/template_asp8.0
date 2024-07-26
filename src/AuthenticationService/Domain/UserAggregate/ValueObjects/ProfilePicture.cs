@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Url to user's profile picture
+/// </summary>
 public record ProfilePicture : ValueObject
 {
     public string Value { get; init; }

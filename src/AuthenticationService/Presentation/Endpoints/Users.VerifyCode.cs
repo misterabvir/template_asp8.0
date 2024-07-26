@@ -13,7 +13,7 @@ public static partial class Users
         {
             var command = new Application.Users.Commands.VerifyCode.Command(request.Email, request.Code);
             var result = await sender.Send(command);
-            return result.IsSuccess ? Results.Ok(Responses.AuthenticationResult.FromResult(result.Value)) : Responses.Problem(result.Error);
+            return result.IsSuccess ? Results.Ok(Responses.AuthenticationResult.FromResult(result.Value)) : result.Error.Problem();
         }
     }
 }

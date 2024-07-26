@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Password to access on the system
+/// </summary>
 public sealed  record Password : ValueObject
 {
     public byte[] Value { get; init; }

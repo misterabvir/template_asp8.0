@@ -5,17 +5,34 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure;
 
+
+/// <summary>
+/// Encrypts class
+/// Contains:
+/// </summary>
+/// <remarks>
+/// Settings for hashing passwords  <br/>
+/// Extension methods for register settings and service<br/>
+/// Implementation of the <see cref="IEncryptService"/> interface 
+/// </remarks>
 public static class Encrypts
 {
     public static IServiceCollection AddEncrypts(this IServiceCollection services, IConfiguration configuration)
     {
         var settings = configuration.GetSection(Settings.SectionName).Get<Settings>() ??
-             throw new Exception("Encrypts settings not configured");
+             throw new EncryptsSettingsNotConfiguredException();
         services.AddSingleton(settings);
         services.AddScoped<IEncryptService, Service>();
         return services;
     }
     
+    public class EncryptsSettingsNotConfiguredException : Exception
+    {
+        public EncryptsSettingsNotConfiguredException() : base("Encrypts settings not configured")
+        {
+        }
+    }
+
     public class Settings
     {
         public const string SectionName = "Settings:Encrypts";

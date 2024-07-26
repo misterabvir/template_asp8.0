@@ -2,6 +2,11 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Biography of user
+/// </summary>
+/// <param name="Value"></param>
+/// </summary>
 public sealed record Bio : ValueObject
 {
     public string Value { get; init; }

@@ -24,7 +24,7 @@ public static partial class Users
 
             var result = await sender.Send(command);
 
-            return result.IsSuccess ? Results.Created() : Responses.Problem(result.Error);
+            return result.IsSuccess ? Results.Created() : result.Error.Problem();
         }
     }
 

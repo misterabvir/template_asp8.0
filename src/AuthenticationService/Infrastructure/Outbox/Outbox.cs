@@ -9,13 +9,22 @@ using Microsoft.Extensions.Logging;
 using Domain.UserAggregate.Events;
 namespace Infrastructure;
 
+/// <summary>
+/// Action part of Outbox pattern
+/// Contains:
+/// </summary>
+/// <remarks>
+/// Settings for create outbox message and run background job, must configured on appsettings  <br/>
+/// Extension methods for register settings<br/>
+/// Extension methods for register background job<br/>
+/// Implementation of the background job for publish events from db to queue
+/// </remarks>
 public static class Outbox
 {
-
     public static Settings AddOutboxMessages(this IServiceCollection services, IConfiguration configuration)
     {
         var settings = configuration.GetSection(Settings.SectionName).Get<Settings>() ?? 
-            throw new Exception("Outbox settings not configured");
+            throw new OutboxSettingsNotConfiguredException();
         services.AddSingleton(settings);
         return settings;
     }
@@ -27,6 +36,14 @@ public static class Outbox
                 .AddTrigger(trigger => trigger.ForJob(jobKey)
                     .WithSimpleSchedule(schedule => schedule.WithIntervalInSeconds(settings.IntervalInSeconds).RepeatForever()));
     }
+
+    public class OutboxSettingsNotConfiguredException : Exception
+    {
+        public OutboxSettingsNotConfiguredException() : base("Outbox settings not configured")
+        {
+        }
+    }
+
     public class Settings{
         public const string SectionName = "Settings:Outbox";
         public required string JobKey { get; set; } 

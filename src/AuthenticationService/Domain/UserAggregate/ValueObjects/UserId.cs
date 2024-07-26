@@ -2,6 +2,10 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Represents a unique identifier for a user.
+/// </summary>
+/// <param name="Value">The unique identifier value.</param>
 public sealed record UserId : ValueObject
 {
     public Guid Value { get; init; }

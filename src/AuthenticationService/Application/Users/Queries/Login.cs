@@ -26,8 +26,6 @@ public static class Login
     public sealed class Handler(AuthenticationDbContext context, ITokenService tokenService, IEncryptService encryptService) :
         IRequestHandler<Query, Result<(User User, string Token)>>
     {
-
-
         public async Task<Result<(User User, string Token)>> Handle(Query query, CancellationToken cancellationToken)
         {
             var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u=>u.Data.Email == query.Email, cancellationToken: cancellationToken);

@@ -1,15 +1,10 @@
 using Application.Common.Services;
-
 using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
 using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Queries;
@@ -40,7 +35,7 @@ public static class SendVerificationCode
                 return Errors.Users.AlreadyActive;
             }
 
-            var result = await verificationService.SendVerificationCodeAsync(user.Id, user.Data.Email, cancellationToken);
+            var result = await verificationService.SendVerificationCodeAsync(user.Id, user.Data.Username, user.Data.Email, cancellationToken);
             return result!;
         }
     }

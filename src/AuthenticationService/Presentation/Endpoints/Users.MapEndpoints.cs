@@ -14,12 +14,12 @@ public static partial class Users
         app.MapPost(SendVerificationCode.Endpoint, SendVerificationCode.Handler).WithOpenApi();
         app.MapPost(VerifyCode.Endpoint, VerifyCode.Handler).WithOpenApi();
         
-        app.MapPut(UpdateData.Endpoint, UpdateData.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
-        app.MapPut(UpdatePassword.Endpoint, UpdatePassword.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
-        app.MapPut(UpdateProfile.Endpoint, UpdateProfile.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
-        app.MapPut(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AppPermissions.AdministratorPolicy).WithOpenApi();
+        app.MapPut(UpdateData.Endpoint, UpdateData.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
+        app.MapPut(UpdatePassword.Endpoint, UpdatePassword.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
+        app.MapPut(UpdateProfile.Endpoint, UpdateProfile.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
+        app.MapPut(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AuthorizationConstants.Policies.Administrator).WithOpenApi();
         
-        app.MapDelete(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AppPermissions.UserPolicy).WithOpenApi();
+        app.MapDelete(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
         return app;
     }
 }

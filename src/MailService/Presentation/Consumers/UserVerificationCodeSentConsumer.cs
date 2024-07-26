@@ -1,9 +1,11 @@
 
+using Presentation;
+
 using MassTransit;
 
 using Shared.Events;
 
-namespace EmailManager.Consumers;
+namespace Presentation.Consumers;
 
 public class UserVerificationCodeSentConsumer(ILogger<UserVerificationCodeSentConsumer> logger, IEmailSender emailSender) : IConsumer<UserVerificationCodeSentEvent>
 {
@@ -11,9 +13,9 @@ public class UserVerificationCodeSentConsumer(ILogger<UserVerificationCodeSentCo
     {
         await Task.CompletedTask;
         logger.LogInformation("User verification code sent: {Email}", context.Message.Email);
-        await emailSender.SendEmailAsync(
-            context.Message.Email, 
-            context.Message.VerificationCode, 
-            EmailSender.EmailTarget.Verification);
+        await emailSender.SendVerificationEmailAsync(
+            context.Message.Email,
+            context.Message.Username,
+            context.Message.VerificationCode);
     }
 }

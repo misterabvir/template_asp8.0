@@ -19,7 +19,7 @@ public static partial class Users
         {
             var query = new Application.Users.Queries.ForgotPassword.Query(request.Email);
             var result = await sender.Send(query);
-            return result.IsSuccess ? Results.Ok() : Responses.Problem(result.Error);
+            return result.IsSuccess ? Results.Ok() : result.Error.Problem();
         }
     }
 }

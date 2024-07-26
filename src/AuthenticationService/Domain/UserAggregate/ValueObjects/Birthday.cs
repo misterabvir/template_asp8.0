@@ -2,6 +2,9 @@ using Shared.Domain;
 
 namespace Domain.UserAggregate.ValueObjects;
 
+/// <summary>
+/// Date of Birth
+/// </summary>
 public sealed  record Birthday : ValueObject
 {
     public DateOnly Value { get; init; }

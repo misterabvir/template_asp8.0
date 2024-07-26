@@ -4,6 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Domain.Persistence.Contexts;
+
+/// <summary>
+/// Context for authentication database
+/// </summary>
+/// <param name="options"></param>
 public class AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options)
     : DbContext(options)
 {
@@ -20,6 +25,10 @@ public class AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> o
     }
 }
 
+/// <summary>
+/// Factory for creating <see cref="AuthenticationDbContext"/>.
+/// Used for create migrations on develope mode only
+/// </summary>
 public class AuthenticationDbContextDesignFactory : IDesignTimeDbContextFactory<AuthenticationDbContext>
 {
     private const string DefaultConnectionString =

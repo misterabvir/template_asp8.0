@@ -5,7 +5,12 @@ using Shared.Domain;
 
 namespace Domain.Persistence.Interceptors;
 
-
+/// <summary>
+/// Interceptor to convert domain events to outbox messages
+/// This is an example of a interceptor that can be used to convert domain events to outbox messages
+/// and store them in a database table for later processing.
+/// This is useful for event sourcing and CQRS patterns.
+/// </summary>
 public class ConvertDomainEventsToOutboxMessagesInterceptor : SaveChangesInterceptor
 {
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(

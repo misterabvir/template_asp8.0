@@ -22,11 +22,11 @@ public static partial class Users
             var userStringId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userStringId) || !Guid.TryParse(userStringId, out var userId))
             {
-                return Responses.Problem(Error.Forbidden("Not authorized"));
+                return Error.Unauthorized("Not authorized").Problem();
             }
             var command = new Application.Users.Commands.Suspend.Command(userId);     
             var result = await sender.Send(command);
-            return result.IsSuccess ? Results.Ok() : Responses.Problem(result.Error);
+            return result.IsSuccess ? Results.Ok() : result.Error.Problem();
         }
     }
 }
