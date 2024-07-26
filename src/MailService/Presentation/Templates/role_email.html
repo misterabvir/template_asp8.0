@@ -30,7 +30,7 @@
             padding: 10px 20px;
             margin-top: 20px;
             color: #ffffff;
-            background-color: #28a745;
+            background-color: #007bff;
             text-decoration: none;
             border-radius: 5px;
         }
@@ -44,17 +44,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to [Your Company Name]!</h1>
-        <p>Hi {{username}},</p>
-        <p>Congratulations! Your email has been successfully verified. We're excited to have you on board at [Your Company Name].</p>
-        <p>Here are a few things you can do next:</p>
-        <ul>
-            <li>Explore our <a href="[Feature Page URL]" style="color: #007bff; text-decoration: none;">features</a> and see how they can help you.</li>
-            <li>Visit your <a href="[User Dashboard URL]" style="color: #007bff; text-decoration: none;">dashboard</a> to customize your settings.</li>
-            <li>Check out our <a href="[Help Center URL]" style="color: #007bff; text-decoration: none;">Help Center</a> if you have any questions.</li>
-        </ul>
-        <a href="[User Dashboard URL]" class="button">Go to Your Dashboard</a>
-        <p>If you have any questions or need assistance, feel free to reply to this email or contact our support team.</p>
+        <h1>Role Update Notification</h1>
+        <p>Dear {{username}},</p>
+        <p>We would like to inform you that your role within [Your Company Name] has been updated. Your new role is: <strong>{{role}}</strong>.</p>
+        <p>This change may affect your permissions and access levels within our system. Please log in to your account to review your new permissions and ensure you understand the changes.</p>
+        <a href="[Account Login URL]" class="button">Log in to Your Account</a>
+        <p>If you have any questions or concerns about this change, please contact our support team for assistance.</p>
         <div class="footer">
             <p>&copy; [Year] [Your Company Name]. All rights reserved.</p>
             <p>[Company Address]</p>

@@ -4,12 +4,12 @@ using Shared.Events;
 
 namespace Presentation.Consumers;
 
-public class UserWelcomeEmailSentConsumer(
-    ILogger<UserWelcomeEmailSentConsumer> logger,
+public class UserWelcomeConsumer(
+    ILogger<UserWelcomeConsumer> logger,
     IEmailSender emailSender) :
-    IConsumer<UserWelcomeEmailSentEvent>
+    IConsumer<UserConfirmedEvent>
 {
-    public Task Consume(ConsumeContext<UserWelcomeEmailSentEvent> context)
+    public Task Consume(ConsumeContext<UserConfirmedEvent> context)
     {
         logger.LogInformation("User welcome email sent: {Email}", context.Message.Email);
         return emailSender.SendWelcomeEmailAsync(

@@ -77,7 +77,7 @@ public sealed class User : Aggregate<UserId>
     public void Suspend()
     {
         Status = Status.Suspended;
-        AddDomainEvent(new UserSuspendedDomainEvent(Id.Value));
+        AddDomainEvent(new UserSuspendedDomainEvent(Id.Value, Data.Username, Data.Email));
         UpdatedAt = DateTime.UtcNow;
     }
 
@@ -89,7 +89,7 @@ public sealed class User : Aggregate<UserId>
     public void ChangeRole(Role role)
     {
         Role = role;
-        AddDomainEvent(new UserRoleChangedDomainEvent(Id.Value, Role.Value));
+        AddDomainEvent(new UserRoleChangedDomainEvent(Id.Value, Data.Email.Value, Data.Username.Value, Role.Value));
         UpdatedAt = DateTime.UtcNow;
     }
 
@@ -102,21 +102,19 @@ public sealed class User : Aggregate<UserId>
     public void UpdatePassword(Password password, Salt salt)
     {
         Data.UpdatePasswordAndSalt(password, salt);
-        AddDomainEvent(new UserPasswordUpdatedDomainEvent(Id.Value));
+        AddDomainEvent(new UserPasswordChangedDomainEvent(Id.Value, Data.Email.Value, Data.Username.Value));
         UpdatedAt = DateTime.UtcNow;
     }
 
     /// <summary>
     /// Update the data of the user
     /// </summary>
-    /// <param name="email">Email of the user</param>
     /// <param name="username">Username of the user</param>
     /// <returns></returns>
-    public void UpdateData(Email email, Username username)
+    public void UpdateUsername(Username username)
     {
-        Data.UpdateEmail(email);
         Data.UpdateUsername(username);
-        AddDomainEvent(new UserDataUpdatedDomainEvent(Id.Value, Data.Email.Value, Data.Username.Value ));
+        AddDomainEvent(new UserUsernameUpdatedDomainEvent(Id.Value, Data.Email.Value, Data.Username.Value, Profile.ProfilePicture.Value));
         UpdatedAt = DateTime.UtcNow;
     }
 
@@ -145,7 +143,7 @@ public sealed class User : Aggregate<UserId>
         Location location)
     {
         Profile.Update(firstName, lastName, profilePicture, coverPicture, bio, gender, birthday, website, location);
-        AddDomainEvent(new UserProfileUpdatedDomainEvent(Id.Value));
+        AddDomainEvent(new UserProfileUpdatedDomainEvent(Id.Value, Data.Email.Value, Data.Username.Value, Profile.ProfilePicture.Value));
         UpdatedAt = DateTime.UtcNow;
     }
 }

@@ -4,12 +4,12 @@ using Shared.Events;
 
 namespace Presentation.Consumers;
 
-public class UserVerificationCodeSentConsumer(
-    ILogger<UserVerificationCodeSentConsumer> logger, 
+public class UserVerificationConsumer(
+    ILogger<UserVerificationConsumer> logger, 
     IEmailSender emailSender) : 
-    IConsumer<UserVerificationCodeSentEvent>
+    IConsumer<UserVerificationEvent>
 {
-    public async Task Consume(ConsumeContext<UserVerificationCodeSentEvent> context)
+    public async Task Consume(ConsumeContext<UserVerificationEvent> context)
     {
         logger.LogInformation("User verification code sent: {Email}", context.Message.Email);
         await emailSender.SendVerificationEmailAsync(

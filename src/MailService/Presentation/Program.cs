@@ -15,8 +15,10 @@ builder.Services.AddMassTransit(options =>
                     throw new Exception("Queue connection string not configured"));
                 cfg.ConfigureEndpoints(context);
             });
-                options.AddConsumer<UserVerificationCodeSentConsumer>();
-                options.AddConsumer<UserWelcomeEmailSentConsumer>();
+                options.AddConsumer<UserVerificationConsumer>();
+                options.AddConsumer<UserWelcomeConsumer>();
+                options.AddConsumer<UserWarningConsumer>();
+                options.AddConsumer<UserRoleConsumer>();
         });
 
 builder.Build().Run();  

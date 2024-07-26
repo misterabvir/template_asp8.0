@@ -70,15 +70,6 @@ public sealed class Data : Entity<UserId>
     /// Update the username of the user
     /// </summary>
     /// <param name="username"></param>
-    internal void UpdateEmail(Email email)
-    {
-        Email = email;
-    }
-
-    /// <summary>
-    /// Update the username of the user
-    /// </summary>
-    /// <param name="username"></param>
     internal void UpdateUsername(Username username)
     {
         Username = username;

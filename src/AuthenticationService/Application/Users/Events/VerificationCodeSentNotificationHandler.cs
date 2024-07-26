@@ -11,7 +11,8 @@ public static class VerificationCodeSent
     {
         public async Task Handle(Notification notification, CancellationToken cancellationToken)
         {
-            await endpoint.Publish(new UserVerificationCodeSentEvent(notification.Username, notification.Email, notification.VerificationCode), cancellationToken);
+            await endpoint.Publish(new UserVerificationEvent(notification.Username, notification.Email, notification.VerificationCode), cancellationToken);
         }
     }
 }
+

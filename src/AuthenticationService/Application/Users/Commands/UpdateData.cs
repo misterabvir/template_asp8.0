@@ -14,9 +14,9 @@ using Shared.Results;
 
 namespace Application.Users.Commands;
 
-public static class UpdateData
+public static class UpdateUsername
 {
-    public sealed record Command(Guid UserId, string Username, string Email) :
+    public sealed record Command(Guid UserId, string Username) :
     IRequest<Result<(User user, string Token)>>;
 
     public sealed class Validator : AbstractValidator<Command>
@@ -25,7 +25,6 @@ public static class UpdateData
         {
             RuleFor(c => c.UserId).NotEmpty();
             RuleFor(c => c.Username).NotEmpty().Matches(Username.Regex);
-            RuleFor(c => c.Email).NotEmpty().Matches(Email.Regex);
         }
     }
 
@@ -33,10 +32,6 @@ public static class UpdateData
     {
         public async Task<Result<(User user, string Token)>> Handle(Command request, CancellationToken cancellationToken)
         {
-            if (await context.Users.AnyAsync(u => u.Data.Email == request.Email, cancellationToken))
-            {
-                return Errors.Users.EmailAlreadyTaken;
-            }
             if (await context.Users.AnyAsync(u => u.Data.Username == request.Username, cancellationToken))
             {
                 return Errors.Users.UsernameAlreadyTaken;
@@ -47,7 +42,7 @@ public static class UpdateData
                 return Errors.Users.NotFound;
             }
             
-            user.UpdateData( Email.Create(request.Email), Username.Create(request.Username));
+            user.UpdateUsername(Username.Create(request.Username));
             await context.SaveChangesAsync(cancellationToken);
             var token = tokenService.GenerateToken(user);
             return (user, token);

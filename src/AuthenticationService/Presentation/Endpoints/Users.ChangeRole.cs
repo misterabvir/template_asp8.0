@@ -17,17 +17,18 @@ public static partial class Users
         public record Request(Guid TargetId, string RoleName);
 
         public static async Task<IResult> Handler(
-            [FromServices]HttpContext context, 
-            [FromServices]ISender sender, 
-            [FromBody]Request request)
+            [FromServices] HttpContext context,
+            [FromServices] ISender sender,
+            [FromBody] Request request)
         {
-            var userStringId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userStringId) || !Guid.TryParse(userStringId, out var userId))
+            var resultCurrentUserId = context.GetCurrentUserId();
+            if (resultCurrentUserId.IsFailure)
             {
-                return Error.Unauthorized("Not authorized").Problem();
+                return resultCurrentUserId.Error.Problem();
             }
 
-            var command = new Application.Users.Commands.ChangeRole.Command(userId, request.TargetId, request.RoleName);     
+
+            var command = new Application.Users.Commands.ChangeRole.Command(resultCurrentUserId.Value, request.TargetId, request.RoleName);
             var result = await sender.Send(command);
             return result.IsSuccess ? Results.Ok() : result.Error.Problem();
         }

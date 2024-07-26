@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 using Shared.Results;
 
 namespace Presentation.Endpoints;
@@ -12,6 +14,16 @@ public static partial class Users
             detail: error.Description
         );
     }
+
+
+    internal static Result<Guid> GetCurrentUserId(this HttpContext context)
+    {
+        var userStringId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        return string.IsNullOrEmpty(userStringId) || !Guid.TryParse(userStringId, out var userId)
+            ? (Result<Guid>)Error.Unauthorized("Not authorized")
+            : (Result<Guid>)userId;
+    }
+
 
     public static class Responses
     {

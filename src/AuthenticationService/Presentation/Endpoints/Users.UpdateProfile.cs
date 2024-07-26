@@ -28,13 +28,13 @@ public static partial class Users
 
         public static async Task<IResult> Handler(HttpContext context, ISender sender, Request request)
         {
-            var userStringId = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (string.IsNullOrEmpty(userStringId) || !Guid.TryParse(userStringId, out var userId))
-            {
-                return Error.Unauthorized("Not authorized").Problem();
+             var resultCurrentUserId = context.GetCurrentUserId();
+            if (resultCurrentUserId.IsFailure){
+                return resultCurrentUserId.Error.Problem();
             }
+
             var command = new Application.Users.Commands.UpdateProfile.Command(
-                userId, 
+                resultCurrentUserId.Value, 
                 request.Birthday ?? DateOnly.MinValue, 
                 request.FirstName ?? string.Empty, 
                 request.LastName ?? string.Empty, 
