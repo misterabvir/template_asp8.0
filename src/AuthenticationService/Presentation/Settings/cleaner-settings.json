@@ -1,0 +1,10 @@
+{
+  "Settings": {
+    "DataBaseCleaner": {
+      "JobKey": "CleanerJob",
+      "IntervalInSeconds": 3600,
+      "OldMessagesTimeLimitInDays": 7,
+      "NotVerifiedTimeLimitInHours": 24
+    }
+  }
+}

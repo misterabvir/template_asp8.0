@@ -1,0 +1,10 @@
+{
+  "Settings": {
+    "Encrypts": {
+      "KeyDerivationPrf": "HMACSHA512",
+      "IterationCount": 10000,
+      "LengthInBytes": 64
+    }
+    
+  }
+}

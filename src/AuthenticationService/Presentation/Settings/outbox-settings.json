@@ -1,0 +1,9 @@
+{
+  "Settings": {
+    "Outbox": {
+      "JobKey": "OutboxJob",
+      "IntervalInSeconds": 20,
+      "MessagePerOneTime": 20
+    }
+  }
+}
