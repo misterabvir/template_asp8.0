@@ -59,6 +59,7 @@ public static class Outbox
         {
             var messages = await dbContext.OutboxMessages
             .Where(x => x.ProcessedAt == null)
+            .OrderBy(x => x.CreatedAt)
             .Take(settings.MessagePerOneTime)
             .ToListAsync(context.CancellationToken);
             foreach (var message in messages)
