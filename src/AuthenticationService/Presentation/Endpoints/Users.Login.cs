@@ -11,8 +11,8 @@ public static partial class Users
         public record Request(string Email, string Password);
 
         public static async Task<IResult> Handler(
-            [FromBody]ISender sender, 
-            [FromServices]Request request)
+            [FromServices] ISender sender, 
+            [FromBody] Request request)
         {
             var query = new Application.Users.Queries.Login.Query(request.Email, request.Password);
             var result = await sender.Send(query);

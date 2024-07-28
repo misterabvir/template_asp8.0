@@ -11,7 +11,7 @@ public static class Errors
         public readonly static Error NotFound = Error.NotFound("User not found");
         
         /// <summary> Invalid Credentials  </summary>
-        public readonly static Error InvalidCredentials = Error.NotFound("Invalid Credentials");
+        public readonly static Error InvalidCredentials = Error.BadRequest("Invalid Credentials");
        
         /// <summary> Username already taken </summary>
         public readonly static Error UsernameAlreadyTaken = Error.Conflict("Username already taken");

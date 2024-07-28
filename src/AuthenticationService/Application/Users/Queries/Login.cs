@@ -40,7 +40,7 @@ public static class Login
             }
 
             var password = encryptService.Encrypt(query.Password, user.Data.Salt.Value);
-            if (user.Data.Password.IsSameAs(password))
+            if (user.Data.Password.IsSameAs(password) == false)
             {
                 return Errors.Users.InvalidCredentials;
             }

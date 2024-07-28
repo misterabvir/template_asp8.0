@@ -1,0 +1,102 @@
+version: '3.4'
+
+
+
+services:
+  authentication_api:
+    container_name: authentication_api
+    image: ${DOCKER_REGISTRY-}authentication_api
+    build:
+      context: .
+      dockerfile: src/AuthenticationService/Presentation/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - 10000:8081
+      - 10001:8080
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    networks:
+      - template_net
+      
+  mail:
+    container_name: mail_service
+    hostname: mail_service
+    build: 
+      context: .
+      dockerfile: src/MailService/Presentation/Dockerfile
+    depends_on:
+      - db
+      - cache
+      - queue
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      # - ASPNETCORE_HTTP_PORTS=8080
+      # - ASPNETCORE_HTTPS_PORTS=8081
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro 
+    networks:
+      - template_net
+
+  db:
+    image: postgres:latest
+    container_name: authentication_db
+    hostname: authentication_db
+    restart: always
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./containers/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - template_net
+
+  cache:
+    image: redis
+    container_name: authentication_cache
+    hostname: authentication_cache
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./containers/redis/:/usr/local/etc/redis
+    networks:
+      - template_net
+      
+  queue:
+    image: rabbitmq:management
+    container_name: authentication_queue
+    hostname: authentication_queue
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=username
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./containers/rabbitmq/:/var/lib/rabbitmq
+    networks: 
+      - template_net
+
+  smtp:
+    image: haravich/fake-smtp-server
+    container_name: fake_smtp_server
+    hostname: smtp_mail_server
+    restart: always
+    ports:
+      - "12025:1025"
+      - "12080:1080"
+    networks: 
+      - template_net
+
+networks:
+  template_net:
+

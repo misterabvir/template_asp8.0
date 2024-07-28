@@ -1,57 +1,12 @@
 using Application.Common.Services;
-using MediatR;
 
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Shared.Results;
 
 namespace Infrastructure;
-
-/// <summary>
-/// Verification email class
-/// Contains:
-/// </summary>
-/// <remarks>
-/// Settings for generate verification code and cached, and compare him, must configured on appsettings  <br/>
-/// Extension methods for register settings and service<br/>
-/// Implementation of the <see cref="IVerificationService"/> interface<br/>
-/// </remarks>
-public static class Verifications
+public static partial class Verifications
 {
-   
-    public static IServiceCollection AddVerifications(
-        this IServiceCollection services, 
-        IConfiguration configuration)
-    {
-        var settings = configuration.GetSection(Settings.SectionName).Get<Settings>()??
-            throw new Exception("Verification settings not configured");
-        services.AddSingleton(settings);       
-        return services.AddScoped<IVerificationService, Service>();
-    }
-   
-    public class Settings{
-        public const string SectionName = "Settings:Verification";
-        public int VerificationCodeLength { get; set; }
-        public int TimeOutExpirationInSeconds { get; set; }
-        public int CodeExpirationMinutes { get; set; }
-
-        public DistributedCacheEntryOptions TimeOutOptions => new ()
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(TimeOutExpirationInSeconds)
-        };
-        public DistributedCacheEntryOptions CodeExpirationOptions => new ()
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(CodeExpirationMinutes)
-        };
-
-        public string GetRandomCode() => Guid.NewGuid().ToString()[..VerificationCodeLength];
-
-        public static string GetVerificationCodeKey(Guid userId) => $"VerificationCode:{userId}";
-        public static string GetTimeOutKey(Guid userId) => $"TimeOut:{userId}";
-    }
-    
-   
+  
     public sealed class Service(Settings settings, IDistributedCache cache, IPublisher publisher) : IVerificationService
     {
         public int VerificationCodeLength => settings.VerificationCodeLength;
