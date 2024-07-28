@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.Domain;
 
-namespace Domain.Persistence.Interceptors;
+namespace Infrastructure.Persistence.Interceptors;
 
 /// <summary>
 /// Interceptor to convert domain events to outbox messages

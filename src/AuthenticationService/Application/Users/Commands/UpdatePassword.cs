@@ -1,15 +1,9 @@
+using Application.Common.Repositories;
 using Application.Common.Services;
-
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Commands;
@@ -27,12 +21,12 @@ public static class UpdatePassword
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context, IEncryptService encryptService) : IRequestHandler<Command, Result>
+    public sealed class Handler(IUnitOfWork unitOfWork, IEncryptService encryptService) : IRequestHandler<Command, Result>
     {
 
         public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            var user = await unitOfWork.Users.GetByIdAsync(request.UserId, cancellationToken);
             if(user is null){
                 return Errors.Users.NotFound;
             }
@@ -42,7 +36,7 @@ public static class UpdatePassword
 
             user.UpdatePassword(Password.Create(password), Salt.Create(salt));
 
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
     }

@@ -1,14 +1,9 @@
+using Application.Common.Repositories;
 using Application.Common.Services;
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Commands;
@@ -26,15 +21,15 @@ public static class Register
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context, IEncryptService encryptService) : IRequestHandler<Command, Result>
+    public sealed class Handler(IUnitOfWork unitOfWork, IEncryptService encryptService) : IRequestHandler<Command, Result>
     {
         public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
-            if (await context.Users.AnyAsync(x=>x.Data.Username == request.Username, cancellationToken))
+            if (await unitOfWork.Users.IsUsernameNotUnique(request.Username, cancellationToken))
             {
                 return Errors.Users.UsernameAlreadyTaken;
             }
-            if (await context.Users.AnyAsync(x=>x.Data.Email == request.Email, cancellationToken))
+            if (await unitOfWork.Users.IsEmailNotUnique(request.Email, cancellationToken))
             {
                 return Errors.Users.EmailAlreadyTaken;
             }
@@ -47,8 +42,8 @@ public static class Register
                 Password.Create(password),
                 Salt.Create(salt));
 
-            await context.Users.AddAsync(user, cancellationToken);
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.Users.AddAsync(user, cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
     }

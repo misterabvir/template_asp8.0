@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using Quartz;
 using Microsoft.Extensions.Logging;
 using Domain.UserAggregate.Events;
-using Domain.Persistence.Contexts;
 using MediatR;
+using Infrastructure.Persistence.Contexts;
 namespace Infrastructure;
 
 public static partial class Outbox

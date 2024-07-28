@@ -1,10 +1,11 @@
+using Domain.UserAggregate;
 using Domain.UserAggregate.Entities;
 using Domain.UserAggregate.ValueObjects;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Domain.UserAggregate.Configurations;
+namespace Infrastructure.Persistence.Configurations;
 
 /// <summary>
 /// Configuration aggregate User and entities of user owners

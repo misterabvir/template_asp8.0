@@ -17,7 +17,6 @@ builder.Configuration.AddJsonFile("Settings/verification-settings.json", optiona
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
-    .AddPersistence(builder.Configuration)
     .AddApplication(builder.Configuration)
     .AddPresentation(builder.Configuration);
 

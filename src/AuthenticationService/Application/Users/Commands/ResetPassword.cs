@@ -1,14 +1,9 @@
+using Application.Common.Repositories;
 using Application.Common.Services;
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Commands;
@@ -29,7 +24,7 @@ public static class ResetPassword
     }
 
     public sealed class Handler(
-        AuthenticationDbContext context,
+        IUnitOfWork unitOfWork,
         IVerificationService verificationService,
         IEncryptService encryptService,
         ITokenService tokenService) :
@@ -37,7 +32,7 @@ public static class ResetPassword
     {
         public async Task<Result<(User User, string Token)>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Data.Email == request.Email, cancellationToken);
+            var user = await unitOfWork.Users.GetByEmailAsync(request.Email, cancellationToken);
             if (user is null)
             {
                 return Errors.Users.NotFound;
@@ -51,7 +46,7 @@ public static class ResetPassword
             var salt = encryptService.GenerateSalt();
             var password = encryptService.Encrypt(request.Password, salt);
             user.UpdatePassword(Password.Create(password), Salt.Create(salt));
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             var token = tokenService.GenerateToken(user);
             return (user, token);
         }

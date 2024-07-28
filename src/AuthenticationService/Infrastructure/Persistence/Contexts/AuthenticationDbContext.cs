@@ -3,7 +3,7 @@ using Domain.UserAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Domain.Persistence.Contexts;
+namespace Infrastructure.Persistence.Contexts;
 
 /// <summary>
 /// Context for authentication database

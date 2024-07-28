@@ -1,10 +1,9 @@
+using Application.Common.Repositories;
 using Application.Common.Services;
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Shared.Results;
 
 namespace Application.Users.Queries;
@@ -20,11 +19,11 @@ public static class SendVerificationCode
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context, IVerificationService verificationService) : IRequestHandler<Query, Result>
+    public sealed class Handler(IUnitOfWork unitOfWork, IVerificationService verificationService) : IRequestHandler<Query, Result>
     {
         public async Task<Result> Handle(Query query, CancellationToken cancellationToken)
         {
-            var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Data.Email == query.Email, cancellationToken: cancellationToken);
+            var user = await unitOfWork.Users.GetByEmailAsync(query.Email, cancellationToken: cancellationToken);
             if (user is null)
             {
                 return Errors.Users.NotFound;

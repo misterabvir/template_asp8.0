@@ -1,4 +1,4 @@
-namespace Infrastructure.DataBaseCleaner;
+namespace Infrastructure;
 
 public static partial class DataBaseCleaner
 {

@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using Domain.Persistence.Contexts;
-using Domain.Persistence.Interceptors;
+using Infrastructure.Persistence.Contexts;
+using Infrastructure.Persistence.Interceptors;
 
-namespace Domain.Persistence;
+namespace Infrastructure.Persistence;
 
 public static class DependencyInjection
 {

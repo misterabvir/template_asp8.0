@@ -1,12 +1,10 @@
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate.ValueObjects;
-
+using Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
 using Quartz;
 
-namespace Infrastructure.DataBaseCleaner;
+namespace Infrastructure;
 
 public static partial class DataBaseCleaner
 {

@@ -1,12 +1,7 @@
-using Domain.Persistence.Contexts;
+using Application.Common.Repositories;
 using Domain.UserAggregate;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Commands;
@@ -22,18 +17,18 @@ public static class Suspend
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context) : IRequestHandler<Command, Result>
+    public sealed class Handler(IUnitOfWork unitOfWork) : IRequestHandler<Command, Result>
     {
         public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            var user = await unitOfWork.Users.GetByIdAsync(request.UserId, cancellationToken);
             if (user is null)
             {
                 return Errors.Users.NotFound;
             }
 
             user.Suspend();
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
     }

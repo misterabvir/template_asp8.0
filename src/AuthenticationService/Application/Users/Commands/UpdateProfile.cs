@@ -1,15 +1,9 @@
+using Application.Common.Repositories;
 using Application.Common.Services;
-
-using Domain.Persistence.Contexts;
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Results;
 
 namespace Application.Users.Commands;
@@ -37,11 +31,11 @@ public static class UpdateProfile
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context, ITokenService tokenService) : IRequestHandler<Command, Result<(User User, string Token)>>
+    public sealed class Handler(IUnitOfWork unitOfWork, ITokenService tokenService) : IRequestHandler<Command, Result<(User User, string Token)>>
     {
         public async Task<Result<(User User, string Token)>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            var user = await unitOfWork.Users.GetByIdAsync(request.UserId, cancellationToken);
             if(user is null)
             {
                 return Errors.Users.NotFound;
@@ -59,7 +53,7 @@ public static class UpdateProfile
                 Location.Create(request.Location)
             );
 
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
 
             var token = tokenService.GenerateToken(user);
             return (user, token);

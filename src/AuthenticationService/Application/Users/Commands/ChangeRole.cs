@@ -1,13 +1,9 @@
-using Domain.Persistence.Contexts;
+using Application.Common.Repositories;
+
 using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
-
 using FluentValidation;
-
 using MediatR;
-
-using Microsoft.EntityFrameworkCore;
-
 using Shared.Domain;
 using Shared.Results;
 
@@ -26,11 +22,11 @@ public static class ChangeRole
         }
     }
 
-    public sealed class Handler(AuthenticationDbContext context) : IRequestHandler<Command, Result>
+    public sealed class Handler(IUnitOfWork unitOfWork) : IRequestHandler<Command, Result>
     {
         public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
-            var initiator = await context.Users.FirstOrDefaultAsync(u => u.Id == request.InitiatorUserId, cancellationToken);
+            var initiator = await unitOfWork.Users.GetByIdAsync(request.InitiatorUserId, cancellationToken);
             if (initiator is null)
             {
                 return Errors.Users.NotFound;
@@ -41,7 +37,7 @@ public static class ChangeRole
                 return Errors.Users.NotHavePermission;
             }
 
-            var target = await context.Users.FirstOrDefaultAsync(u => u.Id == request.TargetUserId, cancellationToken);
+            var target = await unitOfWork.Users.GetByIdAsync(request.TargetUserId, cancellationToken);
             if (target is null)
             {
                 return Errors.Users.NotFound;
@@ -56,7 +52,7 @@ public static class ChangeRole
 
             target.ChangeRole(role);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
     }

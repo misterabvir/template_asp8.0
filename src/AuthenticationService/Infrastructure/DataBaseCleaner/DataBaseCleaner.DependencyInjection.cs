@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Quartz;
 
-namespace Infrastructure.DataBaseCleaner;
+namespace Infrastructure;
 
 public static partial class DataBaseCleaner
 {

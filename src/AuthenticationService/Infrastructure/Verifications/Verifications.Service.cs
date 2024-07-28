@@ -1,5 +1,7 @@
 using Application.Common.Services;
 
+using MediatR;
+
 using Microsoft.Extensions.Caching.Distributed;
 using Shared.Results;
 
