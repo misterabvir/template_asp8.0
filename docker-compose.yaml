@@ -3,6 +3,44 @@ version: '3.4'
 name: template
 
 services:
+  mail:
+    container_name: mail_service
+    hostname: mail_service
+    build: 
+      context: .
+      dockerfile: src/MailService/Presentation/Dockerfile
+    depends_on:
+      - db
+      - cache
+      - queue
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro 
+    networks:
+      - template_net
+  api:
+    container_name: authentication_api
+    hostname: authentication_api
+    build: 
+      context: .
+      dockerfile: src/AuthenticationService/Presentation/Dockerfile
+    depends_on:
+      - db
+      - cache
+      - queue
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - 10001:8080
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro 
+    networks:
+      - template_net
+
   db:
     image: postgres:latest
     container_name: authentication_db
@@ -23,6 +61,7 @@ services:
     image: redis
     container_name: authentication_cache
     hostname: authentication_cache
+    restart: always
     ports:
       - 6379:6379
     volumes:
