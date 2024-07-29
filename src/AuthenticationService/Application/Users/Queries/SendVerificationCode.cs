@@ -29,11 +29,6 @@ public static class SendVerificationCode
                 return Errors.Users.NotFound;
             }
 
-            if (user.Status == Status.Active)
-            {
-                return Errors.Users.AlreadyActive;
-            }
-
             var result = await verificationService.SendVerificationCodeAsync(user.Id, user.Data.Username, user.Data.Email, cancellationToken);
             return result!;
         }

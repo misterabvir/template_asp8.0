@@ -13,6 +13,7 @@ public static partial class Users
         app.MapPost(ResetPassword.Endpoint, ResetPassword.Handler).WithOpenApi();
         app.MapPost(SendVerificationCode.Endpoint, SendVerificationCode.Handler).WithOpenApi();
         app.MapPost(VerifyCode.Endpoint, VerifyCode.Handler).WithOpenApi();
+        app.MapPost(Restore.Endpoint, Restore.Handler).WithOpenApi();
         
         app.MapPut(UpdateUsername.Endpoint, UpdateUsername.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
         app.MapPut(UpdatePassword.Endpoint, UpdatePassword.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();

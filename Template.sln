@@ -27,6 +27,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationServiceTests", "AuthenticationServiceTests", "{CEFC99A7-2E51-4E15-981D-1D8747133108}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTests", "tests\AuthenticationService\ApplicationTests\ApplicationTests.csproj", "{C18C1A34-C870-4A76-A08E-00A95D787ED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{83854645-F70F-4437-BE06-BD3732E8C873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83854645-F70F-4437-BE06-BD3732E8C873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83854645-F70F-4437-BE06-BD3732E8C873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C18C1A34-C870-4A76-A08E-00A95D787ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C18C1A34-C870-4A76-A08E-00A95D787ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C18C1A34-C870-4A76-A08E-00A95D787ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C18C1A34-C870-4A76-A08E-00A95D787ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{601FCB2D-F0F5-4DB9-8A43-BDE5928A8362} = {49521F8F-3EAB-42DF-ACCF-232343EEBC9C}
 		{49521F8F-3EAB-42DF-ACCF-232343EEBC9C} = {A624A55B-40AF-4301-AD4E-58E9CE3E60FA}
 		{CEFC99A7-2E51-4E15-981D-1D8747133108} = {6E274172-8556-47A5-8A5A-24B4BE6271F9}
+		{C18C1A34-C870-4A76-A08E-00A95D787ED3} = {CEFC99A7-2E51-4E15-981D-1D8747133108}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B7D5660-8091-4D63-B49A-4E43C97B4922}

@@ -20,7 +20,10 @@ public static class Login
         }
     }
 
-    public sealed class Handler(IUnitOfWork unitOfWork, ITokenService tokenService, IEncryptService encryptService) :
+    public sealed class Handler(
+        IUnitOfWork unitOfWork, 
+        ITokenService tokenService, 
+        IEncryptService encryptService) :
         IRequestHandler<Query, Result<(User User, string Token)>>
     {
         public async Task<Result<(User User, string Token)>> Handle(Query query, CancellationToken cancellationToken)
