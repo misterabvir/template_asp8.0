@@ -17,7 +17,7 @@ public class UserSuspendedNotificationHandler(
 
     public async Task Handle(UserSuspendedDomainEvent notification, CancellationToken cancellationToken)
     {
-        await endpoint.Publish(new UserConfirmedEvent(notification.Username, notification.Email), cancellationToken);
+        await endpoint.Publish(new UserSuspendedEvent(notification.UserId, notification.Username, notification.Email), cancellationToken);
         logger.LogInformation("User {UserId} account was suspended", notification.UserId);
     }
 }

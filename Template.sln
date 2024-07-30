@@ -29,7 +29,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthenticationServiceTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTests", "tests\AuthenticationService\ApplicationTests\ApplicationTests.csproj", "{C18C1A34-C870-4A76-A08E-00A95D787ED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureTests", "tests\AuthenticationService\InfrastructureTests\InfrastructureTests.csproj", "{102B68A5-76A0-4DFB-B2DB-F0725942E2F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureTests", "tests\AuthenticationService\InfrastructureTests\InfrastructureTests.csproj", "{102B68A5-76A0-4DFB-B2DB-F0725942E2F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\MailService\Domain\Domain.csproj", "{346592A0-595C-43D8-8F89-CB4B2F7567DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\MailService\Application\Application.csproj", "{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\MailService\Infrastructure\Infrastructure.csproj", "{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +79,18 @@ Global
 		{102B68A5-76A0-4DFB-B2DB-F0725942E2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102B68A5-76A0-4DFB-B2DB-F0725942E2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{102B68A5-76A0-4DFB-B2DB-F0725942E2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346592A0-595C-43D8-8F89-CB4B2F7567DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346592A0-595C-43D8-8F89-CB4B2F7567DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346592A0-595C-43D8-8F89-CB4B2F7567DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346592A0-595C-43D8-8F89-CB4B2F7567DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +107,9 @@ Global
 		{CEFC99A7-2E51-4E15-981D-1D8747133108} = {6E274172-8556-47A5-8A5A-24B4BE6271F9}
 		{C18C1A34-C870-4A76-A08E-00A95D787ED3} = {CEFC99A7-2E51-4E15-981D-1D8747133108}
 		{102B68A5-76A0-4DFB-B2DB-F0725942E2F5} = {CEFC99A7-2E51-4E15-981D-1D8747133108}
+		{346592A0-595C-43D8-8F89-CB4B2F7567DE} = {49521F8F-3EAB-42DF-ACCF-232343EEBC9C}
+		{7A621FCF-093D-4D81-B5F7-B4A4FDA4648C} = {49521F8F-3EAB-42DF-ACCF-232343EEBC9C}
+		{68C9030E-AB60-4D77-9BA0-E62CDAD23BBD} = {49521F8F-3EAB-42DF-ACCF-232343EEBC9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B7D5660-8091-4D63-B49A-4E43C97B4922}

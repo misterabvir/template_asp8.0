@@ -1,20 +1,23 @@
 using MassTransit;
 
+using MediatR;
+
 using Shared.Events;
 
 namespace Presentation.Consumers;
 
-public class UserVerificationConsumer(
-    ILogger<UserVerificationConsumer> logger, 
-    IEmailSender emailSender) : 
-    IConsumer<UserVerificationEvent>
+public class UserVerificationConsumer( 
+    ISender sender) : 
+    IConsumer<UserVerifiedEvent>
 {
-    public async Task Consume(ConsumeContext<UserVerificationEvent> context)
+    public async Task Consume(ConsumeContext<UserVerifiedEvent> context)
     {
-        logger.LogInformation("User verification code sent: {Email}", context.Message.Email);
-        await emailSender.SendVerificationEmailAsync(
+            var command = new Application.Commands.Verification.Command(
+            context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
+            "Account suspended",
             context.Message.VerificationCode);
+        await sender.Send(command);   
     }   
 }

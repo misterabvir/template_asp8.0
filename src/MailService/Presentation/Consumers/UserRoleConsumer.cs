@@ -1,20 +1,25 @@
+using Domain;
+
 using MassTransit;
+
+using MediatR;
 
 using Shared.Events;
 
 namespace Presentation.Consumers;
 
 public class UserRoleConsumer(
-    ILogger<UserRoleConsumer> logger,
-    IEmailSender emailSender) :
+    ISender sender) :
     IConsumer<UserRoleChangedEvent>
 {
-    public Task Consume(ConsumeContext<UserRoleChangedEvent> context)
+    public async Task Consume(ConsumeContext<UserRoleChangedEvent> context)
     {
-        logger.LogInformation("User role changed email sent: {Email}", context.Message.Email);
-        return emailSender.SendRoleEmailAsync(
+        var command = new Application.Commands.RoleChanged.Command(
+            context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
+            $"Role changed to '{context.Message.Role}'",
             context.Message.Role);
+        await sender.Send(command);
     }
 }

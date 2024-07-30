@@ -9,6 +9,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["src/MailService/Presentation/Presentation.csproj", "src/MailService/Presentation/"]
+COPY ["src/MailService/Application/Application.csproj", "src/Application/Application/"]
+COPY ["src/MailService/Infrastructure/Infrastructure.csproj", "src/Infrastructure/Infrastructure/"]
+COPY ["src/MailService/Domain/Domain.csproj", "src/Domain/Domain/"]
 COPY ["src/Shared/Shared.csproj", "src/Shared/"]
 RUN dotnet restore "./src/MailService/Presentation/Presentation.csproj"
 COPY . .

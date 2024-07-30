@@ -17,7 +17,7 @@ public class UserPasswordChangedNotificationHandler(
 
     public async Task Handle(UserPasswordChangedDomainEvent notification, CancellationToken cancellationToken)
     {
-        await endpoint.Publish(new UserWarningActivityEvent(notification.Username, notification.Email), cancellationToken);
+        await endpoint.Publish(new UserPasswordChangedEvent(notification.UserId, notification.Username, notification.Email), cancellationToken);
         logger.LogInformation("User {UserId} has changed password", notification.UserId);
     }
 }

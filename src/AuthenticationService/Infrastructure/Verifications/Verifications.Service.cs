@@ -24,7 +24,7 @@ public static partial class Verifications
             await cache.SetStringAsync(Settings.GetVerificationCodeKey(userId), code, settings.CodeExpirationOptions, cancellationToken);
             await cache.SetStringAsync(Settings.GetTimeOutKey(userId), "true", settings.TimeOutOptions, cancellationToken);
 
-            await publisher.Publish(new VerificationCodeSent.Notification(username, email, code), cancellationToken);
+            await publisher.Publish(new VerificationCodeSent.Notification(userId, username, email, code), cancellationToken);
 
             return Result.Success();
         }
