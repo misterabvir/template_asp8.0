@@ -1,17 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
-
 using Application.Common.Services;
-
 using Domain.UserAggregate;
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-
-using Shared.Domain;
 
 namespace Infrastructure;
 
@@ -24,10 +14,10 @@ public static partial class Tokens
             var expiration = DateTime.Now.AddMinutes(settings.ExpirationMinutes);    
             var claims = new []
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Data.Email),
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
-                new Claim(ClaimTypes.Name, user.Data.Username.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
+                new Claim(ClaimTypes.Email, user.Data.Email.Value),
+                new Claim(ClaimTypes.Role, user.Role.Value.ToString()),
+                new Claim(ClaimTypes.Name, user.Data.Username.Value.ToString()),
                 new Claim(ClaimTypes.GivenName, $"{user.Profile.FirstName.Value} {user.Profile.LastName.Value}"),
                 new Claim(ClaimTypes.DateOfBirth, user.Profile.Birthday.Value.ToShortDateString()),
                 new Claim(ClaimTypes.Gender, user.Profile.Gender.Value),

@@ -1,7 +1,6 @@
 using Domain.UserAggregate.ValueObjects;
 using Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace Infrastructure;
@@ -9,7 +8,7 @@ namespace Infrastructure;
 public static partial class DataBaseCleaner
 {
     [DisallowConcurrentExecution]
-    public class CleanerJob(AuthenticationDbContext dbContext, ILogger<CleanerJob> logger, Settings settings) : IJob
+    public class CleanerJob(AuthenticationDbContext dbContext, Settings settings) : IJob
     {
         public async Task Execute(IJobExecutionContext context)
         {
@@ -20,7 +19,6 @@ public static partial class DataBaseCleaner
             foreach (var user in users)
             {
                 dbContext.Users.Remove(user);
-                logger.LogInformation("User {Id} removed", user.Id);
             }
 
             var oldMessages = await dbContext.OutboxMessages
@@ -30,7 +28,6 @@ public static partial class DataBaseCleaner
             foreach (var message in oldMessages)
             {
                 dbContext.OutboxMessages.Remove(message);
-                logger.LogInformation("Message {Id} removed", message.OutboxMessageId);
             }
 
             await dbContext.SaveChangesAsync(context.CancellationToken);
