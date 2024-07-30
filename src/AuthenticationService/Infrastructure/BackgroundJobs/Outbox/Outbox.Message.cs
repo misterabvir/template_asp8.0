@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure;
+namespace Infrastructure.BackgroundJobs;
 
 public static partial class Outbox
 {

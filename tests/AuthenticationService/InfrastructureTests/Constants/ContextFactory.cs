@@ -3,6 +3,7 @@ using Domain.UserAggregate.Events;
 using Domain.UserAggregate.ValueObjects;
 
 using Infrastructure;
+using Infrastructure.BackgroundJobs;
 using Infrastructure.Persistence.Contexts;
 
 using Microsoft.EntityFrameworkCore;

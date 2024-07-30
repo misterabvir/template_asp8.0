@@ -3,6 +3,7 @@
 using FluentAssertions;
 
 using Infrastructure;
+using Infrastructure.BackgroundJobs;
 using Infrastructure.Persistence.Contexts;
 
 using InfrastructureTests.Constants;

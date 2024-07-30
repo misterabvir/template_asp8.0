@@ -35,6 +35,5 @@ public static class ForgotPassword
             var result = await verificationService.SendVerificationCodeAsync(user.Id, user.Data.Username, user.Data.Email, cancellationToken);
             return result.IsFailure ? (Result)result.Error : Result.Success();
         }
-
     }
 }

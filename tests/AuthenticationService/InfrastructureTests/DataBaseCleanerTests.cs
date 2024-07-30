@@ -1,7 +1,7 @@
 ﻿using Domain.UserAggregate;
 using Domain.UserAggregate.ValueObjects;
 using FluentAssertions;
-using Infrastructure;
+using Infrastructure.BackgroundJobs;
 using Infrastructure.Persistence.Contexts;
 using InfrastructureTests.Constants;
 using NSubstitute;
@@ -47,7 +47,7 @@ public class DataBaseCleanerTests
         // Asserts
         var users = _context.Users.Where(x=>x.Status == Status.NotVerified).ToList();
         users.Should().BeEmpty();
-        var messages = _context.OutboxMessages.Where(x=> x.ProcessedAt != null).ToList();
+        var messages = _context.OutboxMessages.Where(x => x.ProcessedAt != null).ToList();
         messages.Should().BeEmpty();
         _context.Database.EnsureDeleted();
         _context.Dispose();

@@ -3,7 +3,7 @@ using Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 
-namespace Infrastructure;
+namespace Infrastructure.BackgroundJobs;
 
 public static partial class DataBaseCleaner
 {

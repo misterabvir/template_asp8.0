@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
-namespace Infrastructure;
+namespace Infrastructure.BackgroundJobs;
 
 public static partial class Outbox
 {

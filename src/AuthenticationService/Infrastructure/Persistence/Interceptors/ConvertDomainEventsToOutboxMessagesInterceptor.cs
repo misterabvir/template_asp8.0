@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.Domain;
+using Infrastructure.BackgroundJobs;
 
 namespace Infrastructure.Persistence.Interceptors;
 

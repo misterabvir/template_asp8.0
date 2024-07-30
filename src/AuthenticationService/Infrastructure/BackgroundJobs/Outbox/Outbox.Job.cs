@@ -4,7 +4,7 @@ using Quartz;
 using Domain.UserAggregate.Events;
 using MediatR;
 using Infrastructure.Persistence.Contexts;
-namespace Infrastructure;
+namespace Infrastructure.BackgroundJobs;
 
 public static partial class Outbox
 {

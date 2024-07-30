@@ -1,5 +1,5 @@
 using Domain.UserAggregate;
-
+using Infrastructure.BackgroundJobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
