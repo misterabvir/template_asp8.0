@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "AuthenticationService.Presentation": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "AuthenticationService.ApplicationUrl": "https://localhost:12000;http://localhost:12001"
+    }
+  }
+}

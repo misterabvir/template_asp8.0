@@ -4,11 +4,11 @@ namespace Shared.Domain;
 
 
 /// <summary>
-/// Represents a domain event.
+/// Represents a AuthenticationService.Domain event.
 /// </summary>
 /// <remarks>
-/// Domain events are used to communicate changes in the domain model.
+/// AuthenticationService.Domain events are used to communicate changes in the AuthenticationService.Domain model.
 /// </remarks>
 /// <seealso cref="INotification" />
-/// <seealso cref="IDomainEvent" />
+/// <seealso cref="IAuthenticationService.DomainEvent" />
 public interface IDomainEvent : INotification { }

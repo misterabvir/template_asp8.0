@@ -1,9 +1,0 @@
-{
-  "Settings": {
-    "Verification": {
-      "VerificationCodeLength": 6,
-      "TimeOutExpirationInSeconds": 20,
-      "CodeExpirationMinutes": 15
-    }
-  }
-}

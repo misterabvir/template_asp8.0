@@ -1,0 +1,14 @@
+{
+  "Settings": {
+    "Token": {
+      "Secret": "",
+      "Issuer": "",
+      "Audience": "",
+      "ExpirationMinutes": 1500,
+      "ValidateIssuer": true,
+      "ValidateAudience": true,
+      "ValidateLifetime": true,
+      "ValidateIssuerSigningKey": true
+    }
+  }
+}

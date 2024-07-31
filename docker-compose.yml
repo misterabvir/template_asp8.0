@@ -8,7 +8,7 @@ services:
   #   image: ${DOCKER_REGISTRY-}authentication_api
   #   build:
   #     context: .
-  #     dockerfile: src/AuthenticationService/Presentation/Dockerfile
+  #     dockerfile: src/AuthenticationService/AuthenticationService.AuthenticationService.Presentation/Dockerfile
   #   environment:
   #     - ASPNETCORE_ENVIRONMENT=Development
   #     - ASPNETCORE_HTTP_PORTS=8080
@@ -31,7 +31,7 @@ services:
   #   hostname: mail_api
   #   build: 
   #     context: .
-  #     dockerfile: src/MailService/Presentation/Dockerfile
+  #     dockerfile: src/MailService/MailService.AuthenticationService.Presentation/Dockerfile
   #   depends_on:
   #     - mail_db
   #     - cache
@@ -74,7 +74,7 @@ services:
       MYSQL_USER: username
       MYSQL_PASSWORD: password
     volumes:
-      - ./containers/user_management_db:/var/lib/mysql
+      - ./containers/mysql:/var/lib/mysql
     networks:
       - template_net
    
