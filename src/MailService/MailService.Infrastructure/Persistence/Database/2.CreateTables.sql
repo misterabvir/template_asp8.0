@@ -12,7 +12,7 @@ CREATE TABLE `users`(
 
 DROP TABLE IF EXISTS `email_templates`;
 CREATE TABLE `email_templates`(
-    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `template_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `type` VARCHAR(255) NOT NULL,
     `header` VARCHAR(255) NOT NULL,
     `body` TEXT NOT NULL
@@ -21,7 +21,7 @@ CREATE TABLE `email_templates`(
 
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages`(
-    `id` VARCHAR(36) NOT NULL PRIMARY KEY,
+    `message_id` VARCHAR(36) NOT NULL PRIMARY KEY,
     `recipient_id` VARCHAR(36) NOT NULL,
     `type` VARCHAR(255) NOT NULL,
     `reason` TEXT NOT NULL,

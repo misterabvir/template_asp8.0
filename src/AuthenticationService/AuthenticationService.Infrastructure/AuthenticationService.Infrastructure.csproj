@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.csproj" />
     <ProjectReference Include="..\AuthenticationService.Application\AuthenticationService.Application.csproj" />
   </ItemGroup>
 

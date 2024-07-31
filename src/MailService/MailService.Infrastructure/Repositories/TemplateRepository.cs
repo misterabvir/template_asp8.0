@@ -16,7 +16,12 @@ public class TemplateRepository(DbConnectionFactory dbConnectionFactory)
         using var connection = dbConnectionFactory.CreateConnection();
         await connection.OpenAsync();
 
-        var sql = "SELECT * FROM email_templates WHERE type = @Type";
+        var sql = @"SELECT 
+            template_id As TemplateId,
+            type As Type,
+            header AS Header,
+            body AS Body 
+            FROM email_templates WHERE type = @Type";
         return await connection.QueryFirstAsync<EmailTemplate>(sql, new { Type = name });
     }
 }

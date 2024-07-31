@@ -15,7 +15,8 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
         using var connection = dbConnectionFactory.CreateConnection();
         await connection.OpenAsync(cancellationToken);
         var message = new Message() {RecipientId= userId, Type = type, Reason = reason };
-        string sql = "INSERT INTO `messages` (id, recipient_id, type, reason, created_at) VALUES (@MessageId, @RecipientId, @Type, @Reason, @CreatedAt)";
+        string sql = @"INSERT INTO `messages` (message_id, recipient_id, type, reason, created_at) 
+                        VALUES (@MessageId, @RecipientId, @Type, @Reason, @CreatedAt)";
         await connection.ExecuteAsync(sql, message);
     }
 
@@ -24,12 +25,12 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
         using var connection = dbConnectionFactory.CreateConnection();
         await connection.OpenAsync(cancellationToken);
          string sql = @"SELECT  
-                m.id AS MessageId,
+                m.message_id AS MessageId,
                 m.recipient_id AS RecipientId,
                 m.type AS Type,
                 m.reason AS Reason,
                 m.created_at AS CreatedAt,
-                u.id AS UserId,
+                u.user_id AS UserId,
                 u.username AS Username,
                 u.email AS Email
             FROM `messages` AS m
@@ -50,12 +51,12 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
         using var connection = dbConnectionFactory.CreateConnection();
         await connection.OpenAsync(cancellationToken);
         string sql = @"SELECT  
-                m.id AS Id,
+                m.message_id AS MessageId,
                 m.recipient_id AS UserId,
                 m.type AS Type,
                 m.reason AS Reason,
                 m.created_at AS CreatedAt,
-                u.id AS UserId,
+                u.user_id AS UserId,
                 u.username AS Username,
                 u.email AS Email
             FROM `messages` AS m
