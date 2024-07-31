@@ -2,7 +2,7 @@ using AuthenticationService.Application.Common.Repositories;
 using AuthenticationService.Domain.UserAggregate;
 using FluentValidation;
 using MediatR;
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Application.Users.Commands;
 

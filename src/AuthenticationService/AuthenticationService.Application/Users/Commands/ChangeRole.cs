@@ -1,10 +1,12 @@
 using AuthenticationService.Application.Common.Repositories;
 using AuthenticationService.Domain.UserAggregate;
 using AuthenticationService.Domain.UserAggregate.ValueObjects;
+
+using Domain.Abstractions;
+using Domain.Results;
+
 using FluentValidation;
 using MediatR;
-using Shared.Domain;
-using Shared.Results;
 
 namespace AuthenticationService.Application.Users.Commands;
 

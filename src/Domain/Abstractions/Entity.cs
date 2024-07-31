@@ -1,4 +1,4 @@
-namespace Shared.Domain;
+namespace Domain.Abstractions;
 
 /// <summary>
 /// Base class for entities

@@ -7,8 +7,8 @@ using NSubstitute;
 
 using Quartz;
 
-using Shared.Domain;
 using AuthenticationService.InfrastructureTests.Constants;
+using Domain.Abstractions;
 
 namespace AuthenticationService.InfrastructureTests;
 

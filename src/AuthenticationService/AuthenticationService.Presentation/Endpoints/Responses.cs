@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Presentation.Endpoints;
 

@@ -2,7 +2,7 @@ using AuthenticationService.Domain.UserAggregate.Entities;
 using AuthenticationService.Domain.UserAggregate.Events;
 using AuthenticationService.Domain.UserAggregate.ValueObjects;
 
-using Shared.Domain;
+using Domain.Abstractions;
 
 namespace AuthenticationService.Domain.UserAggregate;
 

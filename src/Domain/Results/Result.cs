@@ -1,4 +1,4 @@
-namespace Shared.Results;
+namespace Domain.Results;
 
 /// <summary>
 /// Result of action pattern

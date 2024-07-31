@@ -1,7 +1,7 @@
 using FluentValidation;
 using MediatR;
 
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Application.Behaviors;
 public class ValidationBehavior<TRequest, TResponse> (IEnumerable<IValidator> validators): 

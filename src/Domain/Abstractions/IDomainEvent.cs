@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Shared.Domain;
+namespace Domain.Abstractions;
 
 
 /// <summary>

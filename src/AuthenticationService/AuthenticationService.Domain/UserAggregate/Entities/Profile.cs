@@ -1,6 +1,6 @@
 using AuthenticationService.Domain.UserAggregate.ValueObjects;
 
-using Shared.Domain;
+using Domain.Abstractions;
 
 namespace AuthenticationService.Domain.UserAggregate.Entities;
 

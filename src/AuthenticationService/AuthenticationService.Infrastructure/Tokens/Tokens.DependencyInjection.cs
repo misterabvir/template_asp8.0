@@ -1,9 +1,12 @@
 using AuthenticationService.Application.Common.Services;
+
+using Domain.Abstractions;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using Shared.Domain;
+
 
 namespace AuthenticationService.Infrastructure;
 

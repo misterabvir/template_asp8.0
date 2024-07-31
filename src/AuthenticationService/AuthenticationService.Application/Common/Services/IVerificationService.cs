@@ -1,4 +1,4 @@
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Application.Common.Services;
 

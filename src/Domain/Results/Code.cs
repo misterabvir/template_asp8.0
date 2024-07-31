@@ -1,4 +1,4 @@
-namespace Shared.Results;
+namespace Domain.Results;
 
 /// <summary>
 /// Http Status Codes for <see cref="Error"/>

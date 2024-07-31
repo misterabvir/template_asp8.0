@@ -13,7 +13,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.InfrastructureTests;
 

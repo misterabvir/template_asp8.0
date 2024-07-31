@@ -1,4 +1,4 @@
-using Shared.Domain;
+using Domain.Abstractions;
 
 namespace AuthenticationService.Domain.UserAggregate.ValueObjects;
 

@@ -2,7 +2,7 @@ using AuthenticationService.Application.Common.Services;
 using AuthenticationService.Application.Users.Events;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Infrastructure;
 public static partial class Verifications

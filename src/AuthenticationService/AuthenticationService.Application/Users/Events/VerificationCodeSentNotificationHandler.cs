@@ -1,6 +1,6 @@
 using MassTransit;
 using MediatR;
-using Shared.Events;
+using Application.Events;
 namespace AuthenticationService.Application.Users.Events;
 
 

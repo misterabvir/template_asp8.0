@@ -8,7 +8,7 @@ using FluentAssertions;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.ApplicationTests.Users.Commands;
 

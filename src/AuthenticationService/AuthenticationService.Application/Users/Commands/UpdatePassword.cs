@@ -4,7 +4,7 @@ using AuthenticationService.Domain.UserAggregate;
 using AuthenticationService.Domain.UserAggregate.ValueObjects;
 using FluentValidation;
 using MediatR;
-using Shared.Results;
+using Domain.Results;
 
 namespace AuthenticationService.Application.Users.Commands;
 

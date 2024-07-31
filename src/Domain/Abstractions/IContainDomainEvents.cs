@@ -1,4 +1,4 @@
-namespace Shared.Domain;
+namespace Domain.Abstractions;
 
 /// <summary>
 /// Interface for entities that contain AuthenticationService.Domain events.

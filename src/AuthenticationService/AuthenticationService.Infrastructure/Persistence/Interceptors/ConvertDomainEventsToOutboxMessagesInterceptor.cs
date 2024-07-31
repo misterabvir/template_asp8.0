@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Shared.Domain;
 using AuthenticationService.Infrastructure.BackgroundJobs;
+using Domain.Abstractions;
 
 namespace AuthenticationService.Infrastructure.Persistence.Interceptors;
 

@@ -6,7 +6,7 @@ using AuthenticationService.Infrastructure.Persistence.Contexts;
 using AuthenticationService.InfrastructureTests.Constants;
 using NSubstitute;
 using Quartz;
-using Shared.Domain;
+using Domain.Abstractions;
 
 namespace AuthenticationService.InfrastructureTests;
 

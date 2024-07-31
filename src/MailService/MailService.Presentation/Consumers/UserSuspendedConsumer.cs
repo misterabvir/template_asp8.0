@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 using MediatR;
-using Shared.Events;
+using Application.Events;
 
 namespace MailService.Presentation.Consumers;
 

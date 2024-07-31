@@ -5,11 +5,13 @@ using AuthenticationService.Infrastructure;
 using AuthenticationService.Infrastructure.BackgroundJobs;
 using AuthenticationService.Infrastructure.Persistence.Contexts;
 
+using Domain.Abstractions;
+
 using Microsoft.EntityFrameworkCore;
 
 using Newtonsoft.Json;
 
-using Shared.Domain;
+
 
 namespace AuthenticationService.InfrastructureTests.Constants;
 

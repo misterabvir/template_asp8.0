@@ -1,4 +1,4 @@
-namespace Shared.Events;
+namespace Application.Events;
 
 
 public record UserVerifiedEvent(Guid UserId, string Username, string Email, string VerificationCode);

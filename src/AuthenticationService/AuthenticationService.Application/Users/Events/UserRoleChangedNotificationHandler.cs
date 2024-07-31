@@ -6,7 +6,7 @@ using MediatR;
 
 using Microsoft.Extensions.Logging;
 
-using Shared.Events;
+using Application.Events;
 
 namespace AuthenticationService.Application.Users.Events;
 

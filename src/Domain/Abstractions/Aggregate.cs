@@ -1,4 +1,4 @@
-namespace Shared.Domain;
+namespace Domain.Abstractions;
 
 /// <summary>
 /// The base class for all aggregates in the AuthenticationService.Domain.
