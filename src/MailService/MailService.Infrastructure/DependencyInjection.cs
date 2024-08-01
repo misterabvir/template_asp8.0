@@ -1,4 +1,4 @@
-﻿using MailService.Application.Common.Repositories;
+﻿using MailService.Infrastructure.Consumers;
 using MailService.Infrastructure.Persistence;
 using MailService.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -12,15 +12,11 @@ public static class DependencyInjection
         this IServiceCollection services, 
         IConfiguration configuration)
     {
-        var connectionDbString = configuration.GetConnectionString("DbConnection") ?? 
-            throw new Exception("DbConnectionString is not configured");
-        services.AddSingleton(p=> new DbConnectionFactory(connectionDbString));
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IMessageRepository, MessageRepository>();
-        services.AddScoped<TemplateRepository>();
+        services.AddConsumers(configuration);
+        services.AddTokenAuthorization(configuration);
+        services.AddPersistence(configuration);
         services.AddEmailSender(configuration);
-
-
+        services.AddRepositories();
         return services;
     }
 }

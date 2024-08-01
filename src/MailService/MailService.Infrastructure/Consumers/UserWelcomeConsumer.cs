@@ -1,7 +1,7 @@
 using MassTransit;
 using MediatR;
 using Application.Events;
-namespace MailService.Presentation.Consumers;
+namespace MailService.Infrastructure.Consumers;
 
 public class UserWelcomeConsumer(
     ISender sender) :

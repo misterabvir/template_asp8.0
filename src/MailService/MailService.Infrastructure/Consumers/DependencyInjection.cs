@@ -1,19 +1,21 @@
 using MassTransit;
 
-using MailService.Presentation.Common;
-using MailService.Presentation.Common.Exceptions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace MailService.Presentation.Consumers;
+namespace MailService.Infrastructure.Consumers;
 
 public static class DependencyInjection
 {
+    public const string QueueConnection = "QueueConnection";
+
     public static IServiceCollection AddConsumers(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMassTransit(options =>
         {
             options.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host(configuration.GetConnectionString(Constants.QueueConnection) ?? throw new QueueConnectionNotConfiguredException());
+                cfg.Host(configuration.GetConnectionString(QueueConnection) ?? throw new QueueConnectionNotConfiguredException());
                 cfg.ConfigureEndpoints(context);
             });
             options.AddConsumer<UserVerificationConsumer>();
@@ -23,5 +25,12 @@ public static class DependencyInjection
             options.AddConsumer<UserSuspendedConsumer>();
         });
         return services;
+    }
+
+    public class QueueConnectionNotConfiguredException : Exception
+    {
+        public QueueConnectionNotConfiguredException() : base("Queue connection not configured")
+        {
+        }
     }
 }
