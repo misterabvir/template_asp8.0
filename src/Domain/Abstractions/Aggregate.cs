@@ -1,15 +1,5 @@
 namespace Domain.Abstractions;
 
-/// <summary>
-/// The base class for all aggregates in the AuthenticationService.Domain.
-/// </summary>
-/// <typeparam name="TId">The type of the aggregate identifier.</typeparam>
-/// <remarks>
-/// This class implements the <see cref="IContainAuthenticationService.DomainEvents"/> interface, which allows it to store and retrieve AuthenticationService.Domain events.
-/// </remarks>
-/// <seealso cref="IContainAuthenticationService.DomainEvents"/>
-/// <seealso cref="Entity{TId}"/>
-/// <seealso cref="ValueObject"/>
 public abstract class Aggregate<TId> : Entity<TId>, IContainDomainEvents where TId : ValueObject
 {
     /// <summary>

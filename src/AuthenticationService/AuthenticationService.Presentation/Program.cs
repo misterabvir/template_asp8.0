@@ -1,6 +1,7 @@
 using AuthenticationService.Infrastructure;
 using AuthenticationService.Application;
 using AuthenticationService.Presentation;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 

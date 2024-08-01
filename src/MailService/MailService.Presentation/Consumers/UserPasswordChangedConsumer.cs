@@ -10,7 +10,7 @@ public class UserPasswordChangedConsumer(
 {
     public async Task Consume(ConsumeContext<UserPasswordChangedEvent> context)
     {
-        var command = new MailService.Application.Commands.Warning.Command(
+        var command = new Application.Commands.Warning.Command(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,

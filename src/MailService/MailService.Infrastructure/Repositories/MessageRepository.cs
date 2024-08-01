@@ -35,13 +35,13 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
                 u.email AS Email
             FROM `messages` AS m
             INNER JOIN users u ON u.user_id = m.recipient_id
-            ORDER BY created_at 
-            DESC LIMIT @Amount";
+            ORDER BY m.created_at DESC 
+            LIMIT @Amount";
         var messages = await connection.QueryAsync<Message, User, Message>(sql, (message, user)=>{
-             message.User = user;
+             message.Recipient = user;
              return message;   
         },
-        splitOn: "user_id",
+        splitOn: "UserId",
         param: new {Amount = amount});
         return messages;  
     }
@@ -52,7 +52,7 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
         await connection.OpenAsync(cancellationToken);
         string sql = @"SELECT  
                 m.message_id AS MessageId,
-                m.recipient_id AS UserId,
+                m.recipient_id AS RecipientId,
                 m.type AS Type,
                 m.reason AS Reason,
                 m.created_at AS CreatedAt,
@@ -60,15 +60,15 @@ public class MessageRepository(DbConnectionFactory dbConnectionFactory) : IMessa
                 u.username AS Username,
                 u.email AS Email
             FROM `messages` AS m
-            WHERE recipient_id = @UserId 
             INNER JOIN users u ON u.user_id = m.recipient_id
-            ORDER BY created_at 
-            DESC LIMIT @Amount";
+            WHERE m.recipient_id = @UserId 
+            ORDER BY m.created_at DESC 
+            LIMIT @Amount";
         var messages = await connection.QueryAsync<Message, User, Message>(sql, (message, user)=>{
-             message.User = user;
+             message.Recipient = user;
              return message;   
         },
-        splitOn: "user_id",
+        splitOn: "UserId",
         param: new {Amount = amount, UserId = userId});
         return messages;    
     }

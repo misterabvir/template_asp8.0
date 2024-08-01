@@ -1,4 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
+
+using AuthenticationService.Infrastructure;
+
 using Domain.Abstractions;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationService.Presentation.Endpoints;
 

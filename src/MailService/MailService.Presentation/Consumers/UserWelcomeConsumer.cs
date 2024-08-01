@@ -9,7 +9,7 @@ public class UserWelcomeConsumer(
 {
     public async Task Consume(ConsumeContext<UserConfirmedEvent> context)
     {
-        var command = new MailService.Application.Commands.Welcome.Command(
+        var command = new Application.Commands.Welcome.Command(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,

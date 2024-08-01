@@ -1,9 +1,9 @@
 {
   "Settings": {
     "Tokens": {
-      "Secret": "",
-      "Issuer": "",
-      "Audience": "",
+      "Secret": "secret power key no one knows about it",
+      "Issuer": "Issuer",
+      "Audience": "Audience",
       "ExpirationMinutes": 1500,
       "ValidateIssuer": true,
       "ValidateAudience": true,

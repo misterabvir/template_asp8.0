@@ -10,7 +10,7 @@ public class UserVerificationConsumer(
 {
     public async Task Consume(ConsumeContext<UserVerifiedEvent> context)
     {
-            var command = new MailService.Application.Commands.Verification.Command(
+            var command = new Application.Commands.Verification.Command(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,

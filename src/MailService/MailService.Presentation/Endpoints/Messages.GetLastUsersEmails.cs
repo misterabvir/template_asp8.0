@@ -10,7 +10,7 @@ public static partial class Messages
     {
         public const string Route = "/last-user-emails/{amount}/{userId}";
         private const int DefaultAmount = 10;
-        public static async Task<IResult> Handler([FromServices] ISender sender, [FromQuery] Guid userId, [FromQuery] int amount = DefaultAmount)
+        public static async Task<IResult> Handler([FromServices] ISender sender, Guid userId, int amount = DefaultAmount)
         {
 
             if (amount <= 0) return Results.BadRequest();

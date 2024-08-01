@@ -23,15 +23,15 @@ public class DbConnectionFactory
     }
 }
 
-internal class GuidTypeHandler : SqlMapper.TypeHandler<object>
+internal class GuidTypeHandler :SqlMapper.TypeHandler<Guid>
 {
-    public override object? Parse(object value)
+    public override void SetValue(IDbDataParameter parameter, Guid guid)
     {
-        return Guid.Parse(value.ToString()!);
+        parameter.Value = guid.ToString();
     }
 
-    public override void SetValue(IDbDataParameter parameter, object? value)
+    public override Guid Parse(object value)
     {
-        parameter.Value = value?.ToString();
+        return new Guid(value.ToString()!);
     }
 }

@@ -6,6 +6,7 @@ public static partial class Messages
     {
         public class Message
         {
+            public Guid UserId { get; set; }
             public string Username { get; set; } = string.Empty;
             public string Email { get; set; } = string.Empty;
             public string Type { get; set; } = string.Empty;
@@ -18,8 +19,9 @@ public static partial class Messages
     {
         return new Responses.Message
         {
-            Username = message.User?.Username ?? "",
-            Email = message.User?.Email ?? "",
+            UserId = message.RecipientId,
+            Username = message.Recipient?.Username ?? "",
+            Email = message.Recipient?.Email ?? "",
             Type = message.Type,
             Reason = message.Reason
         };

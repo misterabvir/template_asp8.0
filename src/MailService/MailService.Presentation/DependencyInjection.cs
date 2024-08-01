@@ -17,6 +17,7 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var tokenSettings = configuration.GetSection(TokenSettings.SectionName).Get<TokenSettings>() ?? throw new TokenSettingsNotConfiguredException();        
+        services.AddSingleton(tokenSettings);
         services.AddConsumers(configuration);
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => options.TokenValidationParameters = tokenSettings.TokenValidationParameters);
         services.AddAuthorizationBuilder().AddPolicy(Constants.AdminPolicy, policy => policy.RequireRole(Constants.AdminRole));
