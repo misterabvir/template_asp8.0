@@ -2,17 +2,18 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using AuthenticationService.Application.Common.Services;
 using AuthenticationService.Domain.UserAggregate;
+using Infrastructure;
 
 namespace AuthenticationService.Infrastructure;
 
-public static partial class Tokens
+public static partial class JwtTokens
 {
-    public sealed class Service(Settings settings) : ITokenService
+    public sealed class Service(Tokens.Settings settings) : ITokenService
     {
         public string GenerateToken(User user)
         {
-            var expiration = DateTime.Now.AddMinutes(settings.ExpirationMinutes);    
-            var claims = new []
+            var expiration = DateTime.Now.AddMinutes(settings.ExpirationMinutes);
+            var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
                 new Claim(ClaimTypes.Email, user.Data.Email.Value),
@@ -38,3 +39,6 @@ public static partial class Tokens
         }
     }
 }
+
+
+

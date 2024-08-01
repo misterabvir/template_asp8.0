@@ -1,4 +1,4 @@
-﻿namespace MailService.Infrastructure;
+﻿namespace Infrastructure;
 
 public static partial class Tokens
 {

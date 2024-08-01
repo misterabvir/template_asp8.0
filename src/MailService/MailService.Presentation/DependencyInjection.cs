@@ -1,4 +1,5 @@
-﻿using MailService.Presentation.Endpoints;
+﻿using MailService.Infrastructure.Persistence;
+using MailService.Presentation.Endpoints;
 
 namespace MailService.Presentation;
 
@@ -8,11 +9,14 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        
         return services;
     }
 
     public static WebApplication UsePresentation(this WebApplication app)
     {
+        
+        
         app.UseAuthentication();
         app.UseAuthorization();
 

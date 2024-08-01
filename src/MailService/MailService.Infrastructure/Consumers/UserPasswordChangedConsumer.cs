@@ -5,17 +5,19 @@ using Application.Events;
 namespace MailService.Infrastructure.Consumers;
 
 public class UserPasswordChangedConsumer(
-    ISender sender) :
+    IPublisher publisher) :
     IConsumer<UserPasswordChangedEvent>
 {
+    private const string Reason = "User password changed";
+    
     public async Task Consume(ConsumeContext<UserPasswordChangedEvent> context)
     {
-        var command = new Application.Commands.Warning.Command(
+        var notification = new Application.Notifications.Warning.Notification(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
-            "Password Changed");
-        await sender.Send(command);
+            Reason);
+        await publisher.Publish(notification);
     }
 }
 

@@ -27,6 +27,9 @@ public static partial class Users
         app.MapPut(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AuthorizationConstants.Policies.Administrator).WithOpenApi();
         
         app.MapDelete(Suspend.Endpoint, Suspend.Handler).RequireAuthorization(AuthorizationConstants.Policies.User).WithOpenApi();
+        
+        app.MapGet("/test-auth", ()=> "authorized").RequireAuthorization();
+        
         return app;
     }
 }

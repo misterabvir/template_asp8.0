@@ -4,16 +4,17 @@ using Application.Events;
 namespace MailService.Infrastructure.Consumers;
 
 public class UserWelcomeConsumer(
-    ISender sender) :
+    IPublisher publisher) :
     IConsumer<UserConfirmedEvent>
 {
+    public const string Reason = "User confirmed account";
     public async Task Consume(ConsumeContext<UserConfirmedEvent> context)
     {
-        var command = new Application.Commands.Welcome.Command(
+        var notification = new Application.Notifications.Welcome.Notification(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
-            "User confirmed account");
-        await sender.Send(command);   
+            Reason);
+        await publisher.Publish(notification);   
     }
 }

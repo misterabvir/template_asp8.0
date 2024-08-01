@@ -6,24 +6,26 @@ using Dapper;
 using MySql.Data.MySqlClient;
 namespace MailService.Infrastructure.Persistence;
 
-public class DbConnectionFactory
+public class DbConnectionFactory : IDisposable
 {
     private readonly string _connectionString;
-    
+    private DbConnection? _connection;
+
+    public string ConnectionString => _connectionString;
+
     public DbConnectionFactory(string connectionString)
     {
         _connectionString = connectionString;
         SqlMapper.AddTypeHandler(new GuidTypeHandler());
     }
-    
-    
-    public DbConnection CreateConnection()
-    {
-        return new MySqlConnection(_connectionString);
-    }
+
+
+    public DbConnection CreateConnection() => _connection ??= new MySqlConnection(_connectionString);
+
+    public void Dispose() => _connection?.Close();
 }
 
-internal class GuidTypeHandler :SqlMapper.TypeHandler<Guid>
+internal class GuidTypeHandler : SqlMapper.TypeHandler<Guid>
 {
     public override void SetValue(IDbDataParameter parameter, Guid guid)
     {

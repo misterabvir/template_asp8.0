@@ -4,8 +4,8 @@ using MailService.Presentation;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Configuration.AddJsonFile("Common/Settings/token-settings.json", optional: false, reloadOnChange: true);
-builder.Configuration.AddJsonFile("Common/Settings/secrets.json", optional: false, reloadOnChange: true);
+
+builder.Configuration.AddJsonFile("Settings/secrets.json", optional: false, reloadOnChange: true);
 
 builder.Services
     .AddApplication(builder.Configuration)
@@ -13,4 +13,9 @@ builder.Services
     .AddPresentation(builder.Configuration);
 
 
-builder.Build().UsePresentation().Run();  
+var app = builder.Build();
+
+app
+    .UseInfrastructure()
+    .UsePresentation()
+    .Run();  

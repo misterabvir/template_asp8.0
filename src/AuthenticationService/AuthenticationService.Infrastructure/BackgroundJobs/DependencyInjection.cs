@@ -1,8 +1,3 @@
-using AuthenticationService.Application.Common.Repositories;
-
-using AuthenticationService.Infrastructure.Persistence;
-using AuthenticationService.Infrastructure.Repositories;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,13 +18,6 @@ public static class DependencyInjection
            options.AddDataBaseCleanerJob(cleanerSettings);
         });
         services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-        return services;
-    }
-
-    public static IServiceCollection AddRepositories(this IServiceCollection services)
-    {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }
 }

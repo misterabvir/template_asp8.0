@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-namespace MailService.Infrastructure;
+using Domain.Abstractions;
+namespace Infrastructure;
 
 public static partial class Tokens
 {
-    public const string AdminRole = "Administrator";
-    public const string AdminPolicy = "AdministratorPolicy";
-
     public static IServiceCollection AddTokenAuthorization(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddJsonFile("Tokens/token-settings.json")
+            .Build();
 
         var settings = configuration.GetSection(Settings.SectionName).Get<Settings>() ?? throw new TokenSettingsNotConfiguredException();
         services.AddSingleton(settings);
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => options.TokenValidationParameters = settings.TokenValidationParameters);
-        services.AddAuthorizationBuilder().AddPolicy(AdminPolicy, policy => policy.RequireRole(AdminRole));
+        services.AddAuthorizationBuilder() 
+            .AddPolicy(AuthorizationConstants.Policies.Administrator, policy => policy.RequireRole(AuthorizationConstants.Roles.Administrator))
+            .AddPolicy(AuthorizationConstants.Policies.User, policy => policy.RequireRole(AuthorizationConstants.AllRoles));    
         return services;
     }
 

@@ -1,4 +1,5 @@
 using AuthenticationService.Application.Common.Repositories;
+using AuthenticationService.Application.Common.Services;
 using AuthenticationService.Infrastructure.BackgroundJobs;
 using AuthenticationService.Infrastructure.Persistence;
 using AuthenticationService.Infrastructure.Repositories;
@@ -14,20 +15,12 @@ public static class DependencyInjection
         services
             .AddPersistence(configuration)
             .AddRepositories()
-            .AddTokens(configuration)
             .AddEncrypts(configuration)
             .AddVerifications(configuration)
             .AddBackgroundJobs(configuration)
+            .AddJwtTokens()
             ;
+
         return services;
-    }
-
-
-
-    public static IServiceCollection AddRepositories(this IServiceCollection services)
-    {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        return services;
-    }
+    }   
 }

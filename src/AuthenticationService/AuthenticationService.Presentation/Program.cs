@@ -12,7 +12,6 @@ builder.Configuration.AddJsonFile("Settings/appsettings.Secrets.json", optional:
 builder.Configuration.AddJsonFile("Settings/cleaner-settings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile("Settings/encrypt-settings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile("Settings/outbox-settings.json", optional: false, reloadOnChange: true);
-builder.Configuration.AddJsonFile("Settings/token-settings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile("Settings/verification-settings.json", optional: false, reloadOnChange: true);
 
 builder.Services

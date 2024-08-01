@@ -5,17 +5,20 @@ using Application.Events;
 namespace MailService.Infrastructure.Consumers;
 
 public class UserSuspendedConsumer(
-    ISender sender) :
+    IPublisher publisher) :
     IConsumer<UserSuspendedEvent>
 {
+    private const string Reason = "Account suspended";
+
+
     public async Task Consume(ConsumeContext<UserSuspendedEvent> context)
     {
-        var command = new MailService.Application.Commands.Warning.Command(
+        var notification = new Application.Notifications.Warning.Notification(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
-            "Account suspended");
-        await sender.Send(command);     
+            Reason);
+        await publisher.Publish(notification);     
     }
 }
 

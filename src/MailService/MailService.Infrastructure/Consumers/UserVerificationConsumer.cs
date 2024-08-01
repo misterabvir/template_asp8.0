@@ -4,18 +4,19 @@ using Application.Events;
 
 namespace MailService.Infrastructure.Consumers;
 
-public class UserVerificationConsumer( 
-    ISender sender) : 
+public class UserVerificationConsumer(
+    IPublisher publisher) : 
     IConsumer<UserVerifiedEvent>
 {
+    public const string Reason = "Account must be verified";
     public async Task Consume(ConsumeContext<UserVerifiedEvent> context)
     {
-            var command = new Application.Commands.Verification.Command(
+            var notification = new Application.Notifications.Verification.Notification(
             context.Message.UserId,
             context.Message.Email,
             context.Message.Username,
-            "Account must be verified",
+            Reason,
             context.Message.VerificationCode);
-        await sender.Send(command);   
+        await publisher.Publish(notification);   
     }   
 }
